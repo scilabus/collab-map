@@ -1,0 +1,46 @@
+<head>
+  <title>map</title>
+
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+
+<body>
+  <h1>Welcome to Scilabus map</h1>
+
+  <div id="map"></div>
+
+  {{> sidebar }}
+
+  {{> addnew }}
+
+</body>
+
+<template name="addnew">
+    <div id="modal-add-new" class="modal">
+      <div class="modal-content">
+        <h4>Modal Header</h4>
+        <p>A bunch of text</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+      </div>
+    </div>
+
+    <a class="waves-effect waves-light btn modal-trigger" id="show-add-new">+</a>
+
+</template>
+
+<template name="sidebar">
+    <ul id="slide-out" class="side-nav">
+       <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+       <li><a href="#!">Second Link</a></li>
+       <li><div class="divider"></div></li>
+       <li><a class="subheader place">Subheader</a></li>
+       <li><a class="waves-effect place" href="#!">Third Link With Waves</a></li>
+     </ul>
+
+    <a data-activates="slide-out" class="button-collapse waves-effect waves-light btn " id="show-menu"> > </a>
+</template>

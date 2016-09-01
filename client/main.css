@@ -1,0 +1,16 @@
+/* CSS declarations go here */
+
+#show-add-new {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background-color: #64b5f6;
+}
+
+
+#show-menu {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background-color: #64b5f6;
+}
