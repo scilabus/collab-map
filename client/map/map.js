@@ -12,7 +12,7 @@ export function loadMap(container){
     // map.showCollisionBoxes = true;
 
     map.on('load', () => { loadLayers(map) });
-
+    
     map.on('click', (e) => {
         const features = map.queryRenderedFeatures(e.point, { layers: ['points'] });
         if (features.length) {
@@ -26,32 +26,12 @@ function loadLayers(map) {
         "type": "geojson",
         "data": {
             "type": "FeatureCollection",
-            "features": [{
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [2.3744, 48.8443]
-                },
-                "properties": {
-                    "title": "Gare de Lyon",
-                    "icon": "water"
-                }
-            }, {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": [2.2945, 48.8584]
-                },
-                "properties": {
-                    "title": "Tour Eiffel",
-                    "icon": "star"
-                }
-            }]
+            "features": []
         }
     });
 
     map.addLayer({
-        "id": "points",
+        "id": "pointsLayer",
         "type": "symbol",
         "source": "points",
         "layout": {
@@ -62,6 +42,8 @@ function loadLayers(map) {
             "text-anchor": "top"
         }
     });
+
+    setData( Images.find() );
 }
 
 
@@ -72,4 +54,28 @@ function onClickOnPlace(map, place) {
 
 export function flyTo(position) {
     map.flyTo({center: [2.2945, 48.8584]});
+}
+
+export function setData(points) {
+    console.log("Loading data...");
+    map.getSource("points").setData( buildGeoJson(points) );
+}
+
+function buildGeoJson( cursor ) {
+    const features = cursor.map( (image) => { return {
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [image.tags.GPSLongitude, image.tags.GPSLatitude]
+        },
+        "properties": {
+            "title": image._id,
+            "icon": "star"
+        }
+    }});
+
+    return {
+        "type": "FeatureCollection",
+        "features": features
+    };
 }

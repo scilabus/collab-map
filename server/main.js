@@ -34,3 +34,8 @@ images.observe({
         // console.log("REMOVED: ", id);
     }
 })
+
+
+Meteor.publish("points", () => {
+    return Images.find({});
+});
