@@ -1,5 +1,4 @@
 export const ImagePath = "/tmp/uploads";
-const fileType = require('file-type');
 var parser = require('exif-parser');
 
 
