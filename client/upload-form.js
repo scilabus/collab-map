@@ -6,16 +6,27 @@ Template.addnew.events({
         clearForm();
         $('#modal-add-new').openModal();
     },
+    "submit form": function(event, template){
+        event.preventDefault();
+        console.log(event, template);
+
+        const key = getCurrentImg();
+        const point = {
+            img: key,
+            title: event.target.title.value,
+            date: event.target.date.value,
+            coordinates: event.target.coordinates.value,
+            note: event.target.note.value,
+            status: "published"
+        }
+        console.log(point);
+        // insertNewPoint(...);
+    }
 });
 
 Template.addnewform.events({
     "change input[type=file]": function(event, template) {
         FS.Utility.eachFile(event, processFile);
-    },
-    "submit form": function(event, template){
-        event.preventDefault();
-        console.log(event, template);
-        // insertNewPoint(...);
     }
 });
 

@@ -1,21 +1,25 @@
 <template name="addnew">
+    <!-- @todo move to form-modal template -->
     <div id="modal-add-new" class="modal">
-      <div class="modal-content">
-        <h4>Ajouter une photo à la carte collaborative</h4>
+        <form action="#">
+          <div class="modal-content">
+            <h4>Ajouter une photo à la carte collaborative</h4>
 
-        {{> addnewform }}
-      </div>
+            {{> addnewform }}
+          </div>
 
-      <div class="modal-footer">
-        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Envoyer</a>
-      </div>
+          <div class="modal-footer">
+            <button class="modal-action modal-close waves-effect waves-green btn" type="submit">Envoyer</button>
+            <button class="modal-action modal-close waves-effect waves-green btn-flat">Annuler</button>
+          </div>
+      </form>
     </div>
 
     <a class="waves-effect waves-light btn modal-trigger" id="show-add-new">+</a>
 </template>
 
 <template name="addnewform">
-    <form action="#">
+
       <div class="file-field input-field">
         <div class="btn">
           <span>Photo</span>
@@ -29,7 +33,6 @@
       {{#if isImageSent }}
         {{> details}}
       {{/if}}
-    </form>
 </template>
 
 
@@ -38,24 +41,24 @@
        <form class="col s12">
          <div class="row">
            <div class="input-field col s12">
-             <input id="title" type="text" class="validate" required>
+             <input name="title" type="text" class="validate" required>
              <label for="title">Titre</label>
            </div>
          </div>
          <div class="row">
            <div class="input-field col s6">
-             <input value="{{getCurrentImgDate}}" id="date" type="text" class="validate">
+             <input value="{{getCurrentImgDate}}" name="date" type="text" class="validate">
              <label for="date">Date</label>
            </div>
            <div class="input-field col s6">
-             <input disabled value="{{getCurrentImgGPS}}" id="coordinates" type="text">
+             <input disabled value="{{getCurrentImgGPS}}" name="coordinates" type="text">
              <label for="coordinates">GPS</label>
            </div>
          </div>
          <div class="row">
            <div class="input-field col s12">
-               <textarea id="textarea1" class="materialize-textarea" length="120"></textarea>
-               <label for="textarea1">Commentaire</label>
+               <textarea name="note" class="materialize-textarea"></textarea>
+               <label for="note">Commentaire</label>
            </div>
          </div>
        </form>
