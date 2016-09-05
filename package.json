@@ -5,6 +5,11 @@
     "start": "meteor run"
   },
   "dependencies": {
-    "meteor-node-stubs": "~0.2.0"
+    "exif": "^0.6.0",
+    "exif-parser": "^0.1.9",
+    "fast-exif": "^0.2.0",
+    "file-type": "^3.8.0",
+    "image-type": "^2.1.0",
+    "meteor-node-stubs": "^0.2.3"
   }
 }
