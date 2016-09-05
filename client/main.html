@@ -17,35 +17,3 @@
   {{> addnew }}
 
 </body>
-
-<template name="addnew">
-    <div id="modal-add-new" class="modal">
-      <div class="modal-content">
-        <h4>Ajouter une photo</h4>
-        <p>A bunch of text</p>
-
-        {{> addnewform }}
-      </div>
-      <div class="modal-footer">
-        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Envoyer</a>
-      </div>
-    </div>
-
-    <a class="waves-effect waves-light btn modal-trigger" id="show-add-new">+</a>
-</template>
-
-<template name="addnewform">
-    <form action="#">
-      <div class="file-field input-field">
-        <div class="btn">
-          <span>File</span>
-          <input type="file" name="files" id="files" required>
-        </div>
-        <div class="file-path-wrapper">
-          <input class="file-path validate" type="text">
-        </div>
-      </div>
-      <!-- <a href="#!" class="waves-effect waves-green btn" type="submit">Envoyer</a> -->
-      <input href="#!" class="waves-effect waves-green btn" type="submit">
-    </form>
-</template>

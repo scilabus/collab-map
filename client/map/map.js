@@ -1,5 +1,7 @@
+import { Tracker } from 'meteor/tracker'
+import { Images } from '/common/images-collection'
 
-let map;
+let map = null;
 
 export function loadMap(container){
     mapboxgl.accessToken = 'pk.eyJ1Ijoic2NpbGFidXMiLCJhIjoiY2lzYjJvNmszMDE5NTJ1cGh6YTlpMjRyOSJ9.thJDMyzQrtgdqG6p56NvlQ';
@@ -12,7 +14,7 @@ export function loadMap(container){
     // map.showCollisionBoxes = true;
 
     map.on('load', () => { loadLayers(map) });
-    
+
     map.on('click', (e) => {
         const features = map.queryRenderedFeatures(e.point, { layers: ['points'] });
         if (features.length) {
@@ -43,7 +45,9 @@ function loadLayers(map) {
         }
     });
 
-    setData( Images.find() );
+    Tracker.autorun( () => {
+        setData( Images.find() );
+    });
 }
 
 

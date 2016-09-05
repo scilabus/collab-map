@@ -1,0 +1,63 @@
+<template name="addnew">
+    <div id="modal-add-new" class="modal">
+      <div class="modal-content">
+        <h4>Ajouter une photo à la carte collaborative</h4>
+
+        {{> addnewform }}
+      </div>
+
+      <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Envoyer</a>
+      </div>
+    </div>
+
+    <a class="waves-effect waves-light btn modal-trigger" id="show-add-new">+</a>
+</template>
+
+<template name="addnewform">
+    <form action="#">
+      <div class="file-field input-field">
+        <div class="btn">
+          <span>Photo</span>
+          <input type="file" name="files" id="files" required>
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text">
+        </div>
+      </div>
+
+      {{#if isImageSent }}
+        {{> details}}
+      {{/if}}
+    </form>
+</template>
+
+
+<template name="details">
+    <div class="row">
+       <form class="col s12">
+         <div class="row">
+           <div class="input-field col s12">
+             <input id="title" type="text" class="validate" required>
+             <label for="title">Titre</label>
+           </div>
+         </div>
+         <div class="row">
+           <div class="input-field col s6">
+             <input value="{{getCurrentImgDate}}" id="date" type="text" class="validate">
+             <label for="date">Date</label>
+           </div>
+           <div class="input-field col s6">
+             <input disabled value="{{getCurrentImgGPS}}" id="coordinates" type="text">
+             <label for="coordinates">GPS</label>
+           </div>
+         </div>
+         <div class="row">
+           <div class="input-field col s12">
+               <textarea id="textarea1" class="materialize-textarea" length="120"></textarea>
+               <label for="textarea1">Commentaire</label>
+           </div>
+         </div>
+       </form>
+     </div>
+</template>

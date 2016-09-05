@@ -1,0 +1,15 @@
+<template name="sidebar">
+    <ul id="slide-out" class="side-nav">
+       <li><a href="#!">Scilabus</a></li>
+       <li><a href="#!">Second Link</a></li>
+
+       <li><div class="divider"></div></li>
+       <li><a class="subheader">Images</a></li>
+       {{#each getPoints}}
+            {{log this}}
+            <li><a class="waves-effect point" href="#!">{{ _id }}</a></li>
+       {{/each}}
+     </ul>
+
+    <a data-activates="slide-out" class="button-collapse waves-effect waves-light btn " id="show-menu"> > </a>
+</template>
