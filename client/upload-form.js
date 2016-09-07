@@ -1,5 +1,6 @@
 import { Session } from 'meteor/session'
 import { Images, processFile } from '/common/images-collection'
+import { insertNewPoint } from '/common/points-collection'
 
 Template.addnew.events({
     'click #show-add-new'(event, instance) {
@@ -8,19 +9,22 @@ Template.addnew.events({
     },
     "submit form": function(event, template){
         event.preventDefault();
-        console.log(event, template);
+        // console.log(event, template);
 
         const key = getCurrentImg();
         const point = {
-            img: key,
+            imgId: key,
             title: event.target.title.value,
             date: event.target.date.value,
-            coordinates: event.target.coordinates.value,
+            coord: {
+                long: Session.get('current-img-long') || null,
+                lat: Session.get('current-img-lat') || null
+            },
             note: event.target.note.value,
             status: "published"
         }
-        console.log(point);
-        // insertNewPoint(...);
+
+        insertNewPoint(point);
     }
 });
 
@@ -38,13 +42,7 @@ Template.addnewform.helpers({
 
 Template.details.helpers({
     getCurrentImgGPS: () => {
-        const key = getCurrentImg();
-        const img = Images.findOne(key);
-        console.log(img);
-        if(img && img.tags && img.tags.GPSLongitude && img.tags.GPSLatitude){
-            return [img.tags.GPSLongitude, img.tags.GPSLatitude];
-        }
-        return null;
+        return [Session.get('current-img-long'), Session.get('current-img-lat')]
     },
     getCurrentImgDate: () => {
         const key = getCurrentImg();
@@ -62,4 +60,6 @@ function getCurrentImg() {
 
 function clearForm() {
     Session.set('current-img', null);
+    Session.set('current-img-lat', null);
+    Session.set('current-img-long', null);
 }

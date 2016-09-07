@@ -29,7 +29,8 @@ Template.sidebar.events({
     },
 
     'click .point'(event, template){
-        console.log(e);
-        flyTo(null);
+        const lat = parseFloat(event.currentTarget.dataset.lat);
+        const long = parseFloat(event.currentTarget.dataset.long);
+        flyTo(long, lat);
     },
 });

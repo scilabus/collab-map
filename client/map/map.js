@@ -56,8 +56,8 @@ function onClickOnPlace(map, place) {
     map.flyTo({center: place.geometry.coordinates});
 }
 
-export function flyTo(position) {
-    map.flyTo({center: [2.2945, 48.8584]});
+export function flyTo(lat, long) {
+    map.flyTo({center: [lat, long]});
 }
 
 export function setData(points) {

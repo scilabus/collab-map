@@ -32,6 +32,11 @@ function insertFile(file) {
             invalidFile(null, err);
         }else{
             Session.set('current-img', fileObj._id);
+
+            if(fileObj.tags && fileObj.tags.GPSLongitude && fileObj.tags.GPSLatitude){
+                Session.set('current-img-lat', fileObj.tags.GPSLatitude);
+                Session.set('current-img-long', fileObj.tags.GPSLongitude);
+            }
         }
     });
 }
