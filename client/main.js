@@ -9,15 +9,10 @@ import { insertNewPoint } from '/common/points-collection'
 import './main.html';
 
 Meteor.startup(() => {
-    Mapbox.load({
-        gl: true
-    })
+    loadMap('map');
 });
 
 Tracker.autorun(() => {
-    if(Mapbox.loaded()) {
-        loadMap('map');
-    }
 });
 
 Meteor.subscribe("images");

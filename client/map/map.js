@@ -14,9 +14,13 @@ export function loadMap(container){
     map.showCollisionBoxes = true;
 
     map.on('load', () => { loadLayers(map) });
-
+    
+    map.on('mousemove', function (e) {
+        var features = map.queryRenderedFeatures(e.point, { layers: ['pointsLayer'] });
+        map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+    });
     map.on('click', (e) => {
-        const features = map.queryRenderedFeatures(e.point, { layers: ['points'] });
+        const features = map.queryRenderedFeatures(e.point, { layers: ['pointsLayer'] });
         if (features.length) {
             onClickOnPlace(map, features[0]);
         }
