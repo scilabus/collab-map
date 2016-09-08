@@ -1,10 +1,7 @@
-/* CSS declarations go here */
-
-#show-add-new {
+.add-button {
     position: absolute;
     right: 10px;
-    top: 10px;
-    background-color: #64b5f6;
+    bottom: 30px;
 }
 
 

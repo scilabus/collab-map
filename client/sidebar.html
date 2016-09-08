@@ -9,7 +9,17 @@
             {{log this}}
             <li><a class="waves-effect point" href="#!" data-lat="{{coord.lat}}" data-long="{{coord.long}}">{{ title }}</a></li>
        {{/each}}
+
+       <ul class="collection">
+           {{#each getPoints}}
+            <li class="collection-item avatar">
+              <i class="material-icons circle">folder</i>
+              <span class="title">{{title}}</span>
+              <!-- <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a> -->
+            </li>
+           {{/each}}
+       </ul>
      </ul>
 
-    <a data-activates="slide-out" class="button-collapse waves-effect waves-light btn " id="show-menu"> > </a>
+    <a data-activates="slide-out" class="button-collapse waves-effect waves-light btn " id="show-menu"> <i class="material-icons">menu</i> </a>
 </template>

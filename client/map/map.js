@@ -1,5 +1,5 @@
 import { Tracker } from 'meteor/tracker'
-import { Images } from '/common/images-collection'
+import { Points } from '/common/points-collection'
 
 let map = null;
 
@@ -11,7 +11,7 @@ export function loadMap(container){
         center: [2.3522, 48.8566], // starting position
         zoom: 12 // starting zoom
     });
-    // map.showCollisionBoxes = true;
+    map.showCollisionBoxes = true;
 
     map.on('load', () => { loadLayers(map) });
 
@@ -46,7 +46,7 @@ function loadLayers(map) {
     });
 
     Tracker.autorun( () => {
-        setData( Images.find() );
+        setData( Points.find() );
     });
 }
 
@@ -61,19 +61,18 @@ export function flyTo(lat, long) {
 }
 
 export function setData(points) {
-    console.log("Loading data...");
     map.getSource("points").setData( buildGeoJson(points) );
 }
 
 function buildGeoJson( cursor ) {
-    const features = cursor.map( (image) => { return {
+    const features = cursor.map( (point) => { return {
         "type": "Feature",
         "geometry": {
             "type": "Point",
-            "coordinates": [image.tags.GPSLongitude, image.tags.GPSLatitude]
+            "coordinates": [point.coord.long, point.coord.lat]
         },
         "properties": {
-            "title": image._id,
+            "title": point.title,
             "icon": "star"
         }
     }});
