@@ -45,12 +45,12 @@ function insertFile(file) {
 }
 
 function invalidFile(file, e) {
-    Materialize.toast("Image non valide, veuillez soumettre une image au format JPEG");
+    Materialize.toast("Image non valide, veuillez soumettre une image au format JPEG", 3000);
     Session.set('current-img', null);
 }
 
 export function processFile(file) {
-        Materialize.toast(`Processing ${file.name} (${(file.size/(1024*1024)).toFixed(3)} MB)`, 500);
+        Materialize.toast(`Processing ${file.name} (${(file.size/(1024*1024)).toFixed(3)} MB)`, 800);
         let reader = new FileReader();
 
         reader.onerror = invalidFile;

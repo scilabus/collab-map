@@ -16,5 +16,5 @@ Meteor.publish("images", () => {
 });
 
 Meteor.publish("points", () => {
-    return Points.find({});
+    return Points.find({status: "published"});
 });

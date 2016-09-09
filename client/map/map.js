@@ -60,6 +60,9 @@ function loadLayers(map) {
     Tracker.autorun( () => {
         setData( Points.find() );
     });
+
+    // display the rest
+    Session.set('map-loaded', true);
 }
 
 export function flyTo(lat, long) {

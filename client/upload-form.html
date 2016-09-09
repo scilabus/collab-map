@@ -10,14 +10,12 @@
 
           <div class="modal-footer">
             <button class="modal-action modal-close waves-effect waves-green btn" type="submit">Envoyer</button>
-            <button class="modal-action modal-close waves-effect waves-green btn-flat">Annuler</button>
+            <button class="modal-action modal-close waves-effect waves-green btn-flat" id="cancel">Annuler</button>
           </div>
       </form>
     </div>
 
-    <!-- <a class="waves-effect waves-light btn modal-trigger" id="show-add-new">+</a> -->
     <a class="btn-floating btn-large waves-effect waves-light red add-button modal-trigger" id="show-add-new"><i class="material-icons">add</i></a>
-
 </template>
 
 <template name="addnewform">
@@ -25,7 +23,7 @@
       <div class="file-field input-field">
         <div class="btn">
           <span>Photo</span>
-          <input type="file" name="files" id="files" required>
+          <input type="file" value="" name="files" id="files" required>
         </div>
         <div class="file-path-wrapper">
           <input class="file-path validate" type="text">
@@ -50,11 +48,11 @@
          <div class="row">
            <div class="input-field col s6">
              <input value="{{getCurrentImgDate}}" name="date" type="text" class="validate">
-             <label for="date">Date</label>
+             <label for="date" class="{{ifThen getCurrentImgDate 'active'}}">Date</label>
            </div>
            <div class="input-field col s5">
-             <input disabled value="{{getCurrentImgGPS}}" name="coordinates" type="text" active>
-             <label for="coordinates">GPS</label>
+             <input disabled value="{{getCurrentImgGPS}}" name="coordinates" type="text">
+             <label for="coordinates" class="{{ifThen getCurrentImgGPS 'active'}}">GPS</label>
            </div>
            <div class="input-field col s1">
              <a class="btn-floating red"><i class="material-icons">edit_location</i></a>
@@ -72,8 +70,8 @@
          </div>
          <div class="row">
            <div class="input-field col s12">
-               <textarea name="note" class="materialize-textarea"></textarea>
-               <label for="note">Commentaire</label>
+               <textarea name="description" class="materialize-textarea"></textarea>
+               <label for="description">Description <small>(HTML)</small></label>
            </div>
          </div>
      </div>

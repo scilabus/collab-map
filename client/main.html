@@ -1,5 +1,5 @@
 <head>
-  <title>map</title>
+  <title>Science map - Scilabus</title>
 
     <style>
         body { margin:0; padding:0; }
@@ -12,15 +12,28 @@
 </head>
 
 <body>
-  <h1>Welcome to Scilabus map</h1>
+  {{> preloader }}
 
   <div id="map"></div>
 
-  {{> sidebar }}
-
-  {{> addnew }}
-
-  {{> detail_card }}
-
+  {{#if mapLoaded}}
+      {{> sidebar }}
+      {{> addnew }}
+      {{> detail_card }}
+  {{/if}}
 
 </body>
+
+<template name="preloader">
+    <div class="preloader-wrapper big active valign-wrapper">
+      <div class="spinner-layer spinner-blue-only valign">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+    </div>
+</template>

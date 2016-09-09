@@ -7,7 +7,7 @@ Template.addnew.events({
         clearForm();
         $('#modal-add-new').openModal();
     },
-    "submit form": function(event, template){
+    "submit form"(event, template) {
         event.preventDefault();
 
         const key = getCurrentImg();
@@ -17,16 +17,21 @@ Template.addnew.events({
             date: event.target.date.value,
             coord: {
                 long: Session.get('current-img-long') || null,
-                lat: Session.get('current-img-lat') || null
+                lat: Session.get('current-img-lat') || null,
+                confidence: Session.get('current-coord-confidence') || 1,
             },
             links: {
-                wikipedia: event.target.date.value || null,
+                wikipedia: event.target.wikipedia.value || null,
             },
-            note: event.target.note.value,
+            note: event.target.description.value,
             status: "published"
         }
 
         insertNewPoint(point);
+        clearForm(event.target);
+    },
+    "click #cancel"(event, template) {
+        clearForm(template.find("form"));
     }
 });
 
@@ -53,6 +58,13 @@ Template.details.helpers({
             return img.tags.GPSDateStamp;
         }
         return null;
+    },
+    ifThen: (condition, value) => {
+        if(!!condition){
+            return value;
+        }else{
+            return null;
+        }
     }
 })
 
@@ -60,8 +72,12 @@ function getCurrentImg() {
     return Session.get('current-img') || null;
 }
 
-function clearForm() {
+function clearForm(form) {
     Session.set('current-img', null);
     Session.set('current-img-lat', null);
     Session.set('current-img-long', null);
+
+    if(form){
+        form.reset();
+    }
 }

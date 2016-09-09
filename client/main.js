@@ -21,3 +21,7 @@ Meteor.subscribe("points");
 Template.registerHelper("log", function(msg){
     console.log(msg);
 });
+
+Template.registerHelper("mapLoaded", function(msg){
+    return !!Session.get('map-loaded');
+});
