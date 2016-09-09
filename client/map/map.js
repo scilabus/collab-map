@@ -34,7 +34,7 @@ function loadLayers(map) {
         "type": "symbol",
         "source": "points",
         "layout": {
-            // "icon-image": "{icon}-15",
+            "icon-image": "embassy-15",
             "text-field": "{title}",
             "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
             "text-offset": [0, 0.6],

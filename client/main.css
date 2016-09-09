@@ -19,6 +19,13 @@
     top: 60px;
 }
 
-img div.card-image {
-    overflow: hidden;
+.icon-links{
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+}
+
+i .icon-links {
+    margin: 1px;
+    padding: 1px;
 }

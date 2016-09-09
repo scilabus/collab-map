@@ -9,7 +9,7 @@ Template.addnew.events({
     },
     "submit form": function(event, template){
         event.preventDefault();
-        
+
         const key = getCurrentImg();
         const point = {
             imgId: key,
@@ -18,6 +18,9 @@ Template.addnew.events({
             coord: {
                 long: Session.get('current-img-long') || null,
                 lat: Session.get('current-img-lat') || null
+            },
+            links: {
+                wikipedia: event.target.date.value || null,
             },
             note: event.target.note.value,
             status: "published"
