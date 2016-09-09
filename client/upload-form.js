@@ -66,7 +66,13 @@ Template.details.helpers({
             return null;
         }
     }
-})
+});
+
+Template.details.events({
+    "click #edit-location"(e, t){
+        Session.set("mode", "edit-location");
+    }
+});
 
 function getCurrentImg() {
     return Session.get('current-img') || null;

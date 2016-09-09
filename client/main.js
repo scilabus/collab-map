@@ -25,3 +25,7 @@ Template.registerHelper("log", function(msg){
 Template.registerHelper("mapLoaded", function(msg){
     return !!Session.get('map-loaded');
 });
+
+Template.registerHelper("isEditLocationMode", function(msg){
+    return Session.get('mode') === "edit-location";
+});

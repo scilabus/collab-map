@@ -29,3 +29,12 @@ i .icon-links {
     margin: 1px;
     padding: 1px;
 }
+
+
+div.edit-location {
+    width: 100%;
+    height: 50px;
+    position: absolute;
+    top: 0px;
+    /*opacity: .8;*/
+}

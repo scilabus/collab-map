@@ -17,9 +17,13 @@
   <div id="map"></div>
 
   {{#if mapLoaded}}
-      {{> sidebar }}
-      {{> addnew }}
-      {{> detail_card }}
+      {{#if isEditLocationMode}}
+        {{> edit_location}}
+      {{else}}
+        {{> sidebar }}
+        {{> addnew }}
+        {{> detail_card }}
+      {{/if}}
   {{/if}}
 
 </body>
