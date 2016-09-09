@@ -25,7 +25,6 @@ Template.sidebar.events({
                  console.log(result);
             }
         });
-        // console.log('clicked');
     },
 
     'click .point'(event, template){

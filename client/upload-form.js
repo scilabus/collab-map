@@ -9,8 +9,7 @@ Template.addnew.events({
     },
     "submit form": function(event, template){
         event.preventDefault();
-        // console.log(event, template);
-
+        
         const key = getCurrentImg();
         const point = {
             imgId: key,

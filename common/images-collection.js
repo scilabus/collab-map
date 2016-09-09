@@ -1,4 +1,4 @@
-var parser = require('exif-parser');
+const parser = require('exif-parser');
 import { Session } from 'meteor/session'
 
 export const ImagePath = "/tmp/uploads";
@@ -21,6 +21,9 @@ Images.allow({
         return true;
     },
     'update': function () {
+        return true;
+    },
+    'download': function () {
         return true;
     }
 });

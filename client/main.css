@@ -11,3 +11,14 @@
     top: 10px;
     background-color: #64b5f6;
 }
+
+.point-info {
+    width: 320px;
+    position: absolute;
+    left: 10px;
+    top: 60px;
+}
+
+img div.card-image {
+    overflow: hidden;
+}
