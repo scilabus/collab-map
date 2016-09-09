@@ -1,3 +1,6 @@
+<template name="upload_btn">
+
+</template>
 <template name="addnew">
     <!-- @todo move to form-modal template -->
     <div id="modal-add-new" class="modal">
@@ -14,8 +17,9 @@
           </div>
       </form>
     </div>
-
-    <a class="btn-floating btn-large waves-effect waves-light red add-button modal-trigger" id="show-add-new"><i class="material-icons">add</i></a>
+    {{#unless isEditLocationMode}}
+        <a class="btn-floating btn-large waves-effect waves-light red add-button modal-trigger" id="show-add-new"><i class="material-icons">add</i></a>
+    {{/unless}}
 </template>
 
 <template name="addnewform">
@@ -30,9 +34,9 @@
         </div>
       </div>
 
-      {{#if isImageSent }}
+      <!-- {{#if isImageSent }} -->
         {{> details}}
-      {{/if}}
+      <!-- {{/if}} -->
 </template>
 
 
