@@ -1,7 +1,3 @@
-p {
-    font-weight: 300;
-}
-
 .add-button {
     position: absolute;
     right: 10px;
@@ -44,13 +40,14 @@ div.edit-location {
     opacity: .95;
 }
 
-p div.edit-location {
-    margin: 2px;
-    /*margin-left: 15px;*/
-    line-height: 1.5;
-    font-size: 18px;
+.compact {
+    margin: 0px;
 }
 
-a.btn-flat div.edit-location {
-    margin-top: -5px;
+.light-text {
+    font-weight: 300;
+}
+
+#close-edit-location {
+    margin-top: 10px;
 }

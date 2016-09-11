@@ -1,7 +1,21 @@
 <template name="edit_location">
-    <div class="card-panel edit-location light-blue z-depth-2">
-         <p>Déplacer le marqueur pour éditer la position de la photo {{formatGps getCurrentGPS}}.
-            <a class="right waves-effect waves-light btn-flat" id="close-edit-location"><i class="material-icons left">save</i>Enregistrer</a>
-         </p>
+    <div class="card-panel edit-location  light-text light-blue z-depth-2">
+        <div class="row compact">
+           <div class="col s6">
+               <p>Déplacer le marqueur pour éditer la position de la photo {{formatGps getCurrentGPS}}.</p>
+           </div>
+           <div class="col s3 input-field compact">
+               <select id="precision" class="light-text">
+                 <option value="1" disabled selected>Précision</option>
+                 <option value="1">Position exacte</option>
+                 <option value=".6">À quelques mètres</option>
+                 <option value=".2">Dans le quartier</option>
+               </select>
+
+           </div>
+           <div class="col s3">
+               <a class="right waves-effect waves-light btn-flat" id="close-edit-location"><i class="material-icons left">save</i>Enregistrer</a>
+           </div>
+        </div>
     </div>
 </template>

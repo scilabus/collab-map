@@ -51,7 +51,7 @@ function loadLayers(map) {
         "type": "symbol",
         "source": "points",
         "layout": {
-            "icon-image": "marker-15",
+            "icon-image": "marker-blue",
             "text-field": "{title}",
             "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
             "text-offset": [0, 0.6],
@@ -67,15 +67,12 @@ function loadLayers(map) {
 
     map.addLayer({
         "id": "edit-location",
-        "type": "circle",
+        "type": "symbol",
         "source": "edit-location",
         "layout": {
-            "visibility": "none"
+            "visibility": "none",
+            "icon-image": "marker-red",
         },
-        "paint": {
-            "circle-radius": 10,
-            "circle-color": "#3887be"
-        }
     });
 
     Tracker.autorun( () => {
@@ -144,12 +141,10 @@ function onMouseMove(e) {
     if(isEditLocationMode){
         const features = map.queryRenderedFeatures(e.point, { layers: ['edit-location'] });
         if (features.length) {
-            map.setPaintProperty('edit-location', 'circle-color', '#3bb2d0');
             canvas.style.cursor = 'move';
             isCursorOverPoint = true;
             map.dragPan.disable();
         } else {
-            map.setPaintProperty('edit-location', 'circle-color', '#3887be');
             canvas.style.cursor = '';
             isCursorOverPoint = false;
             map.dragPan.enable();

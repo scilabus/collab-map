@@ -23,10 +23,18 @@ export function isEditLocationMode() {
     return Session.get('mode') === "edit-location";
 }
 
-Template.edit_location.helpers({
-
+Template.edit_location.onRendered( () => {
+    $('#precision').material_select();
 });
 
 Template.edit_location.events({
-    "click #close-edit-location": exitEditLocationMode
+    "click #close-edit-location": exitEditLocationMode,
+    "change #precision"(e) {
+        try{
+            const val = parseFloat(e.target.value);
+            if(val){
+                Session.set('current-coord-confidence', val);
+            }
+        }catch(_){}
+    }
 });
