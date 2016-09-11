@@ -30,3 +30,7 @@ Template.detail_card.helpers({
         }
     }
 });
+
+Template.detail_card.onRendered( () => {
+    $('.tooltipped').tooltip({delay: 50});
+});

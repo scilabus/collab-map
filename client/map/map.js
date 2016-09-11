@@ -51,7 +51,7 @@ function loadLayers(map) {
         "type": "symbol",
         "source": "points",
         "layout": {
-            "icon-image": "marker-blue",
+            "icon-image": "marker-red",
             "text-field": "{title}",
             "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
             "text-offset": [0, 0.6],
@@ -71,7 +71,7 @@ function loadLayers(map) {
         "source": "edit-location",
         "layout": {
             "visibility": "none",
-            "icon-image": "marker-red",
+            "icon-image": "marker-blue",
         },
     });
 

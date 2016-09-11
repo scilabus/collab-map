@@ -20,9 +20,16 @@
         <p>{{{ note }}}</p>
 
         <p class="icon-links">
-            <i class="fa fa-facebook-official right tooltipped" data-position="bottom" data-delay="50" data-tooltip="Partager sur Facebook" aria-hidden="true"></i>
-            <i class="fa fa-twitter right tooltipped" data-position="bottom" data-delay="50" data-tooltip="Partager sur Twitter" aria-hidden="true"></i>
-            <i class="fa fa-wikipedia-w right tooltipped" data-position="bottom" data-delay="50" data-tooltip="Voir la page Wikipedia liée" aria-hidden="true"></i>
+            <div class="fb-like adjust-fb" data-href="http://example.com" data-layout="button" data-action="like" data-size="small" data-show-faces="false" data-share="false">
+            </div>
+
+            <a href="https://twitter.com/share" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+            {{#if wikipedia}}
+                <a href="{{wikipedia}}" target="_blank">
+                    <i class="fa fa-wikipedia-w right tooltipped" data-position="bottom" data-delay="50" data-tooltip="Voir la page Wikipedia liée" aria-hidden="true"></i>
+                </a>
+            {{/if}}
         </p>
     </div>
 </template>

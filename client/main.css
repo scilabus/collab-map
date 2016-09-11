@@ -22,13 +22,17 @@
     position: absolute;
     right: 8px;
     bottom: 8px;
+    margin-bottom: 0px;
+}
+
+.adjust-fb {
+    top: -6px;
 }
 
 i .icon-links {
     margin: 1px;
     padding: 1px;
 }
-
 
 div.edit-location {
     width: calc(100% - 20px);

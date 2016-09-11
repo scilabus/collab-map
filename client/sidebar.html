@@ -1,21 +1,16 @@
 <template name="sidebar">
     <ul id="slide-out" class="side-nav">
-       <li><a href="#!">Scilabus</a></li>
-       <li><a href="#!">Second Link</a></li>
+        <img src="https://pbs.twimg.com/profile_images/556466074699329536/a5Sed1V4_400x400.jpeg" width="200"/>
 
        <li><div class="divider"></div></li>
        <li><a class="subheader">Images</a></li>
-       {{#each getPoints}}
-            <li><a class="waves-effect point" href="#!" data-lat="{{coord.lat}}" data-long="{{coord.long}}">{{ title }}</a></li>
-       {{/each}}
 
        <ul class="collection">
            {{#each getPoints}}
-            <li class="collection-item avatar">
-              <i class="material-icons circle">folder</i>
-              <span class="title">{{title}}</span>
-              <!-- <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a> -->
-            </li>
+           <a href="#!" class="collection-item point" data-lat="{{coord.lat}}" data-long="{{coord.long}}">
+               {{title}}
+               <span class="secondary-content"><i class="material-icons right">location_on</i></span>
+           </a>
            {{/each}}
        </ul>
      </ul>
