@@ -55,8 +55,8 @@
              <label for="date" class="{{ifThen getCurrentImgDate 'active'}}">Date</label>
            </div>
            <div class="input-field col s5">
-             <input disabled value="{{getCurrentImgGPS}}" name="coordinates" type="text">
-             <label for="coordinates" class="{{ifThen getCurrentImgGPS 'active'}}">GPS</label>
+             <input disabled value="{{formatGps getCurrentGPS}}" name="coordinates" type="text">
+             <label for="coordinates" class="{{ifThen getCurrentGPS 'active'}}">GPS</label>
            </div>
            <div class="input-field col s1">
              <a class="btn-floating red" id="edit-location"><i class="material-icons">edit_location</i></a>

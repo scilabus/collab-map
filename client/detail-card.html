@@ -1,7 +1,5 @@
 <template name="detail_card">
     {{#with getSelectedMarker}}
-        {{log this}}
-
         <div class="card point-info hoverable">
             <div class="card-image waves-effect waves-block waves-light">
                 <img class="activator" src="{{ imgUrl }}">
@@ -23,6 +21,8 @@
 
         <!-- <p><a href="#">This is a link</a></p> -->
         <p class="icon-links">
+            <i class="fa fa-facebook-official right tooltipped" data-position="bottom" data-delay="50" data-tooltip="Partager sur Facebook" aria-hidden="true"></i>
+            <i class="fa fa-twitter right tooltipped" data-position="bottom" data-delay="50" data-tooltip="Partager sur Twitter" aria-hidden="true"></i>
             <i class="fa fa-wikipedia-w right tooltipped" data-position="bottom" data-delay="50" data-tooltip="Voir la page Wikipedia liée" aria-hidden="true"></i>
         </p>
     </div>

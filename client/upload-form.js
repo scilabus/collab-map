@@ -49,10 +49,6 @@ Template.addnewform.helpers({
 })
 
 Template.details.helpers({
-    getCurrentImgGPS: () => {
-        // return [Session.get('current-img-long').toFixed(3), Session.get('current-img-lat').toFixed(3)]
-        return [Session.get('current-img-long'), Session.get('current-img-lat')]
-    },
     getCurrentImgDate: () => {
         const key = getCurrentImg();
         const img = Images.findOne(key);

@@ -1,9 +1,12 @@
+p {
+    font-weight: 300;
+}
+
 .add-button {
     position: absolute;
     right: 10px;
     bottom: 30px;
 }
-
 
 #show-menu {
     position: absolute;
@@ -33,11 +36,21 @@ i .icon-links {
 
 div.edit-location {
     width: calc(100% - 20px);
-    /*height: 50px;*/
     margin-top: 2px;
-    padding: 8px;
+    padding: 2px 12px 2px 12px;
     position: absolute;
     top: 2px;
     right: 10px;
-    opacity: .9;
+    opacity: .95;
+}
+
+p div.edit-location {
+    margin: 2px;
+    /*margin-left: 15px;*/
+    line-height: 1.5;
+    font-size: 18px;
+}
+
+a.btn-flat div.edit-location {
+    margin-top: -5px;
 }

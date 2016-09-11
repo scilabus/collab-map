@@ -15,7 +15,7 @@ export function loadMap(container){
     }else{
         map = new mapboxgl.Map({
             container: container, // container id
-            style: 'mapbox://styles/mapbox/streets-v9', //stylesheet location
+            style: 'mapbox://styles/scilabus/cisy4halw004t2wo0mnacdepj', //stylesheet location
             center: [2.3522, 48.8566], // starting position
             zoom: 12 // starting zoom
         });
@@ -51,7 +51,7 @@ function loadLayers(map) {
         "type": "symbol",
         "source": "points",
         "layout": {
-            "icon-image": "embassy-15",
+            "icon-image": "marker-15",
             "text-field": "{title}",
             "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
             "text-offset": [0, 0.6],
@@ -73,8 +73,8 @@ function loadLayers(map) {
             "visibility": "none"
         },
         "paint": {
-         "circle-radius": 10,
-         "circle-color": "#3887be"
+            "circle-radius": 10,
+            "circle-color": "#3887be"
         }
     });
 
@@ -99,8 +99,10 @@ export function enterEditLocationMode(){
 
     const lng = Session.get('current-img-long') || map.getCenter().lng;
     const lat = Session.get('current-img-lat') || map.getCenter().lat;
+
     editLocationMarker.features[0].geometry.coordinates = [lng, lat];
     map.getSource('edit-location').setData(editLocationMarker);
+
     map.setLayoutProperty('edit-location', 'visibility', 'visible');
     map.setLayoutProperty('points-layer', 'visibility', 'none');
 
@@ -109,6 +111,7 @@ export function enterEditLocationMode(){
 export function exitEditLocationMode(){
     map.setLayoutProperty('edit-location', 'visibility', 'none');
     map.setLayoutProperty('points-layer', 'visibility', 'visible');
+
     isEditLocationMode = false;
 }
 
@@ -168,11 +171,10 @@ function onClick(e) {
 }
 
 function onMouseDown() {
-    if (!isCursorOverPoint) return;
+    if (!isEditLocationMode || !isCursorOverPoint)
+        return;
 
     isDragging = true;
-
-    // Set a cursor indicator
     canvas.style.cursor = 'grab';
 
     // Mouse events
