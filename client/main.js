@@ -2,7 +2,8 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Tracker } from 'meteor/tracker'
 
-import { loadMap, setData } from './map/map'
+import { loadMap } from '/client/map/map'
+import { isEditLocationMode } from '/client/edit-location'
 import { processFile } from '/common/images-collection'
 import { insertNewPoint } from '/common/points-collection'
 
@@ -27,5 +28,5 @@ Template.registerHelper("mapLoaded", function(msg){
 });
 
 Template.registerHelper("isEditLocationMode", function(msg){
-    return Session.get('mode') === "edit-location";
+    return isEditLocationMode();
 });

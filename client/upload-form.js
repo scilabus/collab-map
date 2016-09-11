@@ -1,10 +1,11 @@
 import { Session } from 'meteor/session'
 import { Images, processFile } from '/common/images-collection'
 import { insertNewPoint } from '/common/points-collection'
+import { enterEditLocationMode } from '/client/edit-location'
 
 Template.addnew.events({
-    'click #show-add-new'(event, instance) {
-        clearForm();
+    'click #show-add-new'(event, template) {
+        clearForm(template.find("form"));
         $('#modal-add-new').openModal();
     },
     "submit form"(event, template) {
@@ -70,10 +71,7 @@ Template.details.helpers({
 });
 
 Template.details.events({
-    "click #edit-location"(e, t){
-        $('#modal-add-new').closeModal();
-        Session.set("mode", "edit-location");
-    }
+    "click #edit-location": enterEditLocationMode
 });
 
 function getCurrentImg() {

@@ -3,6 +3,10 @@ import { Session } from 'meteor/session'
 import { Points } from '/common/points-collection'
 
 let map = null;
+let isEditLocationMode = false;
+let isDragging = false;
+let isCursorOverPoint = false;
+let canvas = null;
 
 export function loadMap(container){
     mapboxgl.accessToken = 'pk.eyJ1Ijoic2NpbGFidXMiLCJhIjoiY2lzYjJvNmszMDE5NTJ1cGh6YTlpMjRyOSJ9.thJDMyzQrtgdqG6p56NvlQ';
@@ -17,10 +21,23 @@ export function loadMap(container){
         });
 
         map.on('load', () => { loadLayers(map) });
+        canvas = map.getCanvasContainer();
     }
 }
 
+const editLocationMarker = {
+    "type": "FeatureCollection",
+    "features": [{
+        "type": "Feature",
+        "geometry": {
+            "type": "Point",
+            "coordinates": [2.3562, 48.8596]
+        }
+    }]
+};
+
 function loadLayers(map) {
+    // main layer
     map.addSource("points", {
         "type": "geojson",
         "data": {
@@ -30,7 +47,7 @@ function loadLayers(map) {
     });
 
     map.addLayer({
-        "id": "pointsLayer",
+        "id": "points-layer",
         "type": "symbol",
         "source": "points",
         "layout": {
@@ -42,24 +59,32 @@ function loadLayers(map) {
         }
     });
 
-    map.on('mousemove', function (e) {
-        const features = map.queryRenderedFeatures(e.point, { layers: ['pointsLayer'] });
-        map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+    // edit location layer
+    map.addSource('edit-location', {
+        "type": "geojson",
+        "data": editLocationMarker
     });
 
-    map.on('click', (e) => {
-        const features = map.queryRenderedFeatures(e.point, { layers: ['pointsLayer'] });
-        if (features.length) {
-            Session.set('selected-marker', features[0].properties.id);
-            map.flyTo({center: features[0].geometry.coordinates});
-        }else{
-            Session.set('selected-marker', null);
+    map.addLayer({
+        "id": "edit-location",
+        "type": "circle",
+        "source": "edit-location",
+        "layout": {
+            "visibility": "none"
+        },
+        "paint": {
+         "circle-radius": 10,
+         "circle-color": "#3887be"
         }
     });
 
     Tracker.autorun( () => {
         setData( Points.find() );
     });
+
+    map.on('mousemove', onMouseMove);
+    map.on('click', onClick);
+    map.on('mousedown', onMouseDown, true);
 
     // display the rest
     Session.set('map-loaded', true);
@@ -69,7 +94,25 @@ export function flyTo(lat, long) {
     map.flyTo({center: [lat, long]});
 }
 
-export function setData(points) {
+export function enterEditLocationMode(){
+    isEditLocationMode = true;
+
+    const lng = Session.get('current-img-long') || map.getCenter().lng;
+    const lat = Session.get('current-img-lat') || map.getCenter().lat;
+    editLocationMarker.features[0].geometry.coordinates = [lng, lat];
+    map.getSource('edit-location').setData(editLocationMarker);
+    map.setLayoutProperty('edit-location', 'visibility', 'visible');
+    map.setLayoutProperty('points-layer', 'visibility', 'none');
+
+}
+
+export function exitEditLocationMode(){
+    map.setLayoutProperty('edit-location', 'visibility', 'none');
+    map.setLayoutProperty('points-layer', 'visibility', 'visible');
+    isEditLocationMode = false;
+}
+
+function setData(points) {
     map.getSource("points").setData( buildGeoJson(points) );
 }
 
@@ -91,4 +134,69 @@ function buildGeoJson( cursor ) {
         "type": "FeatureCollection",
         "features": features
     };
+}
+
+// mouse events
+function onMouseMove(e) {
+    if(isEditLocationMode){
+        const features = map.queryRenderedFeatures(e.point, { layers: ['edit-location'] });
+        if (features.length) {
+            map.setPaintProperty('edit-location', 'circle-color', '#3bb2d0');
+            canvas.style.cursor = 'move';
+            isCursorOverPoint = true;
+            map.dragPan.disable();
+        } else {
+            map.setPaintProperty('edit-location', 'circle-color', '#3887be');
+            canvas.style.cursor = '';
+            isCursorOverPoint = false;
+            map.dragPan.enable();
+        }
+    }else{
+        const features = map.queryRenderedFeatures(e.point, { layers: ['points-layer'] });
+        canvas.style.cursor = (features.length) ? 'pointer' : '';
+    }
+}
+
+function onClick(e) {
+    const features = map.queryRenderedFeatures(e.point, { layers: ['points-layer'] });
+    if (features.length) {
+        Session.set('selected-marker', features[0].properties.id);
+        map.flyTo({center: features[0].geometry.coordinates});
+    }else{
+        Session.set('selected-marker', null);
+    }
+}
+
+function onMouseDown() {
+    if (!isCursorOverPoint) return;
+
+    isDragging = true;
+
+    // Set a cursor indicator
+    canvas.style.cursor = 'grab';
+
+    // Mouse events
+    map.on('mousemove', onMove);
+    map.on('mouseup', onUp);
+}
+
+
+function onMove(e) {
+    if (!isEditLocationMode || !isDragging)
+        return;
+
+    canvas.style.cursor = 'grabbing';
+    editLocationMarker.features[0].geometry.coordinates = [e.lngLat.lng, e.lngLat.lat];
+    map.getSource('edit-location').setData(editLocationMarker);
+}
+
+function onUp(e) {
+    if (!isEditLocationMode || !isDragging)
+        return;
+
+    Session.set('current-img-long', e.lngLat.lng);
+    Session.set('current-img-lat', e.lngLat.lat);
+
+    canvas.style.cursor = '';
+    isDragging = false;
 }
