@@ -1,13 +1,13 @@
 const parser = require('exif-parser');
 import { Session } from 'meteor/session'
 
-export const ImagePath = "/tmp/uploads";
+export const ImagePath = "~/data/images";
 export const Images = new FS.Collection("images", {
   stores: [
       new FS.Store.FileSystem("images", {
         path: ImagePath,
         filter: {
-            maxSize: 8*1024*1024, // in bytes
+            maxSize: 2*1024*1024, // in bytes
             allow: {
                 contentTypes: ['image/*'],
             }
@@ -50,7 +50,7 @@ function invalidFile(file, e) {
 }
 
 export function processFile(file) {
-        Materialize.toast(`Processing ${file.name} (${(file.size/(1024*1024)).toFixed(3)} MB)`, 800);
+        Materialize.toast(`Traitement de ${file.name} (${(file.size/(1024*1024)).toFixed(3)} MB)`, 800);
         let reader = new FileReader();
 
         reader.onerror = invalidFile;
