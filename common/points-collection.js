@@ -6,29 +6,37 @@ Points.allow({
     'update': () => { return true }
 });
 
+const DefaultJSONContent = {
+    imgId: null,
+    title: "",
+    description: "",
+    date: null,
+    coord: {
+        lat: null,
+        long: null,
+        confidence: 1
+    },
+    links: {
+        wikipedia: ""
+    },
+    status: "published",
+};
+
 export class Point {
-    constructor() {
-        this.imgId = null;
-        this.title = "";
-        this.description = "";
-        this.date = null;
-        this.coord = {
-            lat: null,
-            long: null,
-            confidence: 1
-        };
-        this.links = {
-            wikipedia: ""
-        };
-        this.status = "published";
+    constructor(json) {
+        if(json === null || json === undefined){
+            Object.assign(this, DefaultJSONContent);
+        }else{
+            Object.assign(this, json);
+        }
     }
 
     static getPoint(id) {
-        return Points.findOne({_id: id});
+        return new Point( Points.findOne({_id: id}) );
     }
 
     static getCurrentOrNew() {
-        return Session.get('current-point') || new Point();
+        return new Point( Session.get('current-point') );
     }
 }
 
