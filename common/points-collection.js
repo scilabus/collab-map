@@ -2,14 +2,12 @@ import { Session } from 'meteor/session'
 
 export const Points = new Mongo.Collection('points');
 Points.allow({
-    'insert': function () {
-        return true;
-    }
+    'insert': () => { return true },
+    'update': () => { return true }
 });
 
 export class Point {
     constructor() {
-        this.id = null;
         this.imgId = null;
         this.title = "";
         this.description = "";
@@ -50,8 +48,14 @@ export function setCurrentPoint(point) {
     return Session.set('current-point', point);
 }
 
-export function insertNewPoint(point){
-    if(validatePoint(point)){
-        let e = Points.insert(point);
+export function upsertPoint(point){
+    console.log("> inserting: ", point);
+    // real upsert is not available from client side
+    if(point._id && !!Points.findOne({_id:point._id})){
+        const id = point._id;
+        delete point._id;
+        Points.update({_id: id}, {$set: point});
+    }else{
+        Points.insert(point);
     }
 }

@@ -47,7 +47,7 @@
              <div class="row">
                <div class="input-field col s12">
                  <input name="title" type="text" class="validate" value="{{title}}">
-                 <label for="title">Titre</label>
+                 <label for="title" class="{{ifThen title 'active'}}">Titre</label>
                </div>
              </div>
              <div class="row">
@@ -57,7 +57,7 @@
                </div>
                <div class="input-field col s5">
                  <input disabled value="{{formatGps coord}}" name="coordinates" type="text">
-                 <label for="coordinates" class="{{ifThen getCurrentGPS 'active'}}">GPS</label>
+                 <label for="coordinates" class="{{ifThen coord 'active'}}">GPS</label>
                </div>
                <div class="input-field col s1">
                  <a class="btn-floating red" id="edit-location"><i class="material-icons">edit_location</i></a>
@@ -66,17 +66,17 @@
              <div class="row">
                <div class="input-field col s6">
                  <input name="tags" type="text" class="validate" value="{{tags}}">
-                 <label for="tags">Tags</label>
+                 <label for="tags" class="{{ifThen tags 'active'}}">Tags</label>
                </div>
                <div class="input-field col s6">
                  <input name="wikipedia" type="text" class="validate" value="{{links.wikipedia}}">
-                 <label for="wikipedia">Page Wikipedia</label>
+                 <label for="wikipedia" class="{{ifThen links.wikipedia 'active'}}">Page Wikipedia</label>
                </div>
              </div>
              <div class="row">
                <div class="input-field col s12">
                    <textarea name="description" class="materialize-textarea">{{description}}</textarea>
-                   <label for="description">Description <small>(HTML)</small></label>
+                   <label for="description"  class="{{ifThen description 'active'}}">Description <small>(HTML)</small></label>
                </div>
              </div>
          </div>

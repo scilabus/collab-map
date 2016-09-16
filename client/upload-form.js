@@ -1,6 +1,6 @@
 import { Session } from 'meteor/session'
 import { Images, processFile } from '/common/images-collection'
-import { Point, setCurrentPoint, insertNewPoint } from '/common/points-collection'
+import { Point, setCurrentPoint, upsertPoint } from '/common/points-collection'
 import { enterEditLocationMode } from '/client/edit-location'
 
 Template.addnew.events({
@@ -22,10 +22,10 @@ Template.addnew.events({
         point.links = {
             wikipedia: event.target.wikipedia.value || null,
         };
-        point.note = event.target.description.value;
+        point.description = event.target.description.value;
         point.status = "published";
 
-        insertNewPoint(point);
+        upsertPoint(point);
 
         // clearForm(event.target);
     },
