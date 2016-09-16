@@ -24,23 +24,11 @@ export class Point {
     }
 
     static getPoint(id) {
-        return Points.findOne({_id:id});
+        return Points.findOne({_id: id});
     }
 
     static getCurrentOrNew() {
         return Session.get('current-point') || new Point();
-    }
-
-    setAsCurrent() {
-        return Session.set('current-point', this);
-    }
-
-    persist() {
-        // upsert
-    }
-
-    validate() {
-        //
     }
 }
 
@@ -49,13 +37,16 @@ export function setCurrentPoint(point) {
 }
 
 export function upsertPoint(point){
-    console.log("> inserting: ", point);
+    let id = point._id;
+
     // real upsert is not available from client side
-    if(point._id && !!Points.findOne({_id:point._id})){
-        const id = point._id;
+    if(id && !!Points.findOne({_id: id})){
         delete point._id;
         Points.update({_id: id}, {$set: point});
     }else{
-        Points.insert(point);
+        id = Points.insert(point);
     }
+
+    // not reusing point to refresh id (if we want to insert-edit)
+    setCurrentPoint(Point.getPoint(id));
 }

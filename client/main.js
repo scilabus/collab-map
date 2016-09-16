@@ -38,7 +38,3 @@ Template.registerHelper("formatGps", function(coords){
         return `(${coords.lat.toFixed(3)}, ${coords.long.toFixed(3)})`;
     }
 });
-
-Template.registerHelper("getCurrentGPS", function(){
-    return [Session.get('current-img-long'), Session.get('current-img-lat')];
-});

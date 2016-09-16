@@ -38,16 +38,12 @@ function insertFile(file) {
             const point = new Point();
             point.imgId = fileObj._id;
 
-            // Session.set('current-img', fileObj._id);
-
             if(fileObj.tags && fileObj.tags.GPSLongitude && fileObj.tags.GPSLatitude){
                 point.coord = {
                     lat: fileObj.tags.GPSLatitude,
                     long: fileObj.tags.GPSLongitude,
                     confidence: 1
                 }
-                // Session.set('current-img-lat', fileObj.tags.GPSLatitude);
-                // Session.set('current-img-long', fileObj.tags.GPSLongitude);
             }
             setCurrentPoint(point);
         }

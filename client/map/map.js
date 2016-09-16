@@ -94,8 +94,8 @@ export function flyTo(lat, long) {
 export function enterEditLocationMode(){
     isEditLocationMode = true;
 
-    const lng = Session.get('current-img-long') || map.getCenter().lng;
-    const lat = Session.get('current-img-lat') || map.getCenter().lat;
+    const lng = Session.get('edit-location-long') || map.getCenter().lng;
+    const lat = Session.get('edit-location-lat') || map.getCenter().lat;
 
     editLocationMarker.features[0].geometry.coordinates = [lng, lat];
     map.getSource('edit-location').setData(editLocationMarker);
@@ -191,8 +191,8 @@ function onUp(e) {
     if (!isEditLocationMode || !isDragging)
         return;
 
-    Session.set('current-img-long', e.lngLat.lng);
-    Session.set('current-img-lat', e.lngLat.lat);
+    Session.set('edit-location-long', e.lngLat.lng);
+    Session.set('edit-location-lat', e.lngLat.lat);
 
     canvas.style.cursor = '';
     isDragging = false;
