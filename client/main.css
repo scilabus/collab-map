@@ -55,3 +55,15 @@ div.edit-location {
 #close-edit-location {
     margin-top: 10px;
 }
+
+.edit-mode-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: white;
+    opacity: .1;
+}
+
+.edit-mode-btn:hover {
+    opacity: .9;
+}

@@ -1,5 +1,6 @@
 const parser = require('exif-parser');
 import { Session } from 'meteor/session'
+import { Point, setCurrentPoint } from '/common/points-collection'
 
 export const ImagePath = "~/data/images";
 export const Images = new FS.Collection("images", {
@@ -34,12 +35,21 @@ function insertFile(file) {
             console.log(err);
             invalidFile(null, err);
         }else{
-            Session.set('current-img', fileObj._id);
+            const point = new Point();
+            point.imgId = fileObj._id;
+
+            // Session.set('current-img', fileObj._id);
 
             if(fileObj.tags && fileObj.tags.GPSLongitude && fileObj.tags.GPSLatitude){
-                Session.set('current-img-lat', fileObj.tags.GPSLatitude);
-                Session.set('current-img-long', fileObj.tags.GPSLongitude);
+                point.coord = {
+                    lat: fileObj.tags.GPSLatitude,
+                    long: fileObj.tags.GPSLongitude,
+                    confidence: 1
+                }
+                // Session.set('current-img-lat', fileObj.tags.GPSLatitude);
+                // Session.set('current-img-long', fileObj.tags.GPSLongitude);
             }
+            setCurrentPoint(point);
         }
     });
 }

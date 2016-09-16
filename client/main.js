@@ -32,7 +32,7 @@ Template.registerHelper("isEditLocationMode", function(msg){
 });
 
 Template.registerHelper("formatGps", function(coords){
-    if(!coords || coords.length != 2 || !coords[0] || !coords[1]){
+    if(!coords || coords.length < 2 || !coords[0] || !coords[1]){
         return "";
     }else{
         return `(${coords[0].toFixed(3)}, ${coords[1].toFixed(3)})`;

@@ -41,43 +41,45 @@
 
 
 <template name="details">
-    <div class="row">
-       <div class="col s12">
-         <div class="row">
-           <div class="input-field col s12">
-             <input name="title" type="text" class="validate">
-             <label for="title">Titre</label>
-           </div>
+    {{#with getCurrentPoint }}
+        <div class="row">
+           <div class="col s12">
+             <div class="row">
+               <div class="input-field col s12">
+                 <input name="title" type="text" class="validate" value="{{title}}">
+                 <label for="title">Titre</label>
+               </div>
+             </div>
+             <div class="row">
+               <div class="input-field col s6">
+                 <input value="{{date}}" name="date" type="text" class="validate">
+                 <label for="date" class="{{ifThen date 'active'}}">Date</label>
+               </div>
+               <div class="input-field col s5">
+                 <input disabled value="{{formatGps coord}}" name="coordinates" type="text">
+                 <label for="coordinates" class="{{ifThen getCurrentGPS 'active'}}">GPS</label>
+               </div>
+               <div class="input-field col s1">
+                 <a class="btn-floating red" id="edit-location"><i class="material-icons">edit_location</i></a>
+               </div>
+             </div>
+             <div class="row">
+               <div class="input-field col s6">
+                 <input name="tags" type="text" class="validate" value="{{tags}}">
+                 <label for="tags">Tags</label>
+               </div>
+               <div class="input-field col s6">
+                 <input name="wikipedia" type="text" class="validate" value="{{links.wikipedia}}">
+                 <label for="wikipedia">Page Wikipedia</label>
+               </div>
+             </div>
+             <div class="row">
+               <div class="input-field col s12">
+                   <textarea name="description" class="materialize-textarea">{{description}}</textarea>
+                   <label for="description">Description <small>(HTML)</small></label>
+               </div>
+             </div>
          </div>
-         <div class="row">
-           <div class="input-field col s6">
-             <input value="{{getCurrentImgDate}}" name="date" type="text" class="validate">
-             <label for="date" class="{{ifThen getCurrentImgDate 'active'}}">Date</label>
-           </div>
-           <div class="input-field col s5">
-             <input disabled value="{{formatGps getCurrentGPS}}" name="coordinates" type="text">
-             <label for="coordinates" class="{{ifThen getCurrentGPS 'active'}}">GPS</label>
-           </div>
-           <div class="input-field col s1">
-             <a class="btn-floating red" id="edit-location"><i class="material-icons">edit_location</i></a>
-           </div>
          </div>
-         <div class="row">
-           <div class="input-field col s6">
-             <input name="tags" type="text" class="validate">
-             <label for="tags">Tags</label>
-           </div>
-           <div class="input-field col s6">
-             <input name="wikipedia" type="text" class="validate">
-             <label for="wikipedia">Page Wikipedia</label>
-           </div>
-         </div>
-         <div class="row">
-           <div class="input-field col s12">
-               <textarea name="description" class="materialize-textarea"></textarea>
-               <label for="description">Description <small>(HTML)</small></label>
-           </div>
-         </div>
-     </div>
-     </div>
+     {{/with}}
 </template>

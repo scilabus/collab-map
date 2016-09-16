@@ -1,5 +1,6 @@
 import { Points } from '/common/points-collection'
 import { Images } from '/common/images-collection'
+import { enterEditPointMode } from '/client/upload-form'
 
 Template.detail_card.helpers({
     getSelectedMarker: () => {
@@ -23,11 +24,18 @@ Template.detail_card.helpers({
 
         return {
             title: point.title,
-            note: point.note,
+            id: id,
+            description: point.description,
             user: "FirstName",
             wikipedia: point.links && point.links.wikipedia || null, // null propagation please!
             imgUrl: img.url()
         }
+    }
+});
+
+Template.detail_card.events({
+    'click .edit-mode-btn'() {
+        enterEditPointMode(this.id);
     }
 });
 

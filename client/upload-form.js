@@ -1,6 +1,6 @@
 import { Session } from 'meteor/session'
 import { Images, processFile } from '/common/images-collection'
-import { insertNewPoint } from '/common/points-collection'
+import { Point, setCurrentPoint, insertNewPoint } from '/common/points-collection'
 import { enterEditLocationMode } from '/client/edit-location'
 
 Template.addnew.events({
@@ -8,28 +8,26 @@ Template.addnew.events({
         clearForm(template.find("form"));
         $('#modal-add-new').openModal();
     },
+
     "submit form"(event, template) {
         event.preventDefault();
 
-        const key = getCurrentImg();
-        const point = {
-            imgId: key,
-            title: event.target.title.value,
-            date: event.target.date.value,
-            coord: {
-                long: Session.get('current-img-long') || null,
-                lat: Session.get('current-img-lat') || null,
-                confidence: Session.get('current-coord-confidence') || 1,
-            },
-            links: {
-                wikipedia: event.target.wikipedia.value || null,
-            },
-            note: event.target.description.value,
-            status: "published"
-        }
+        // const key = getCurrentImg();
+        const point = Point.getCurrentOrNew();
+
+        // point.imgId: key,
+        point.title = event.target.title.value;
+        point.date = event.target.date.value;
+        // point.coord -> already set by pict upload of GPS edition
+        point.links = {
+            wikipedia: event.target.wikipedia.value || null,
+        };
+        point.note = event.target.description.value;
+        point.status = "published";
 
         insertNewPoint(point);
-        clearForm(event.target);
+
+        // clearForm(event.target);
     },
     "click #cancel"(event, template) {
         clearForm(template.find("form"));
@@ -49,13 +47,8 @@ Template.addnewform.helpers({
 })
 
 Template.details.helpers({
-    getCurrentImgDate: () => {
-        const key = getCurrentImg();
-        const img = Images.findOne(key);
-        if(img && img.tags && img.tags.GPSDateStamp){
-            return img.tags.GPSDateStamp;
-        }
-        return null;
+    getCurrentPoint: () => {
+        return Point.getCurrentOrNew();
     },
     ifThen: (condition, value) => {
         if(!!condition){
@@ -70,15 +63,18 @@ Template.details.events({
     "click #edit-location": enterEditLocationMode
 });
 
+export function enterEditPointMode(pointId) {
+    const p = Point.getPoint(pointId);
+    setCurrentPoint(p);
+    $('#modal-add-new').openModal();
+}
+
 function getCurrentImg() {
     return Session.get('current-img') || null;
 }
 
 function clearForm(form) {
-    Session.set('current-img', null);
-    Session.set('current-img-lat', null);
-    Session.set('current-img-long', null);
-
+    Session.set('current-point', null);
     if(form){
         form.reset();
     }
