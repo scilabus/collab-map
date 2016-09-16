@@ -1,6 +1,4 @@
-<template name="upload_btn">
 
-</template>
 <template name="addnew">
     <!-- @todo move to form-modal template -->
     <div id="modal-add-new" class="modal">
@@ -12,7 +10,7 @@
           </div>
 
           <div class="modal-footer">
-            <button class="modal-action modal-close waves-effect waves-green btn" type="submit">Envoyer</button>
+            <button class="modal-action modal-close waves-effect waves-green btn {{ifThen isInvalid 'disabled'}}" {{ifThen isInvalid 'disabled'}} type="submit">Envoyer</button>
             <button class="modal-action modal-close waves-effect waves-green btn-flat" id="cancel">Annuler</button>
           </div>
       </form>
@@ -46,7 +44,7 @@
            <div class="col s12">
              <div class="row">
                <div class="input-field col s12">
-                 <input name="title" type="text" class="validate" value="{{title}}">
+                 <input name="title" type="text" class="required" value="{{title}}">
                  <label for="title" class="{{ifThen title 'active'}}">Titre</label>
                </div>
              </div>
@@ -56,7 +54,7 @@
                  <label for="date" class="{{ifThen date 'active'}}">Date</label>
                </div>
                <div class="input-field col s5">
-                 <input disabled value="{{formatGps coord}}" name="coordinates" type="text">
+                 <input disabled value="{{formatGps coord}}" class="required" name="coordinates" type="text">
                  <label for="coordinates" class="{{ifThen coord 'active'}}">GPS</label>
                </div>
                <div class="input-field col s1">

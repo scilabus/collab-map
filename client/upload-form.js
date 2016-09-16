@@ -12,13 +12,10 @@ Template.addnew.events({
     "submit form"(event, template) {
         event.preventDefault();
 
-        // const key = getCurrentImg();
         const point = Point.getCurrentOrNew();
 
-        // point.imgId: key,
         point.title = event.target.title.value;
         point.date = event.target.date.value;
-        // point.coord -> already set by pict upload of GPS edition
         point.links = {
             wikipedia: event.target.wikipedia.value || null,
         };
@@ -34,6 +31,12 @@ Template.addnew.events({
     }
 });
 
+Template.addnew.helpers({
+    isInvalid: () => {
+        return Session.get("upload-form-valid") != true;
+    }
+});
+
 Template.addnewform.events({
     "change input[type=file]": function(event, template) {
         FS.Utility.eachFile(event, processFile);
@@ -44,23 +47,13 @@ Template.addnewform.helpers({
     isImageSent: () => {
         return getCurrentImg() != null;
     }
-})
-
-Template.details.helpers({
-    getCurrentPoint: () => {
-        return Point.getCurrentOrNew();
-    },
-    ifThen: (condition, value) => {
-        if(!!condition){
-            return value;
-        }else{
-            return null;
-        }
-    }
 });
 
 Template.details.events({
-    "click #edit-location": enterEditLocationMode
+    "click #edit-location": enterEditLocationMode,
+    "change .required": () => {
+        Session.set("upload-form-valid", !!$("input[name='title']").val() && !!$("input[name='coordinates']").val());
+    }
 });
 
 export function enterEditPointMode(pointId) {

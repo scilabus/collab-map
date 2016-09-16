@@ -4,8 +4,7 @@ import { Tracker } from 'meteor/tracker'
 
 import { loadMap } from '/client/map/map'
 import { isEditLocationMode } from '/client/edit-location'
-import { processFile } from '/common/images-collection'
-import { insertNewPoint } from '/common/points-collection'
+import { Point } from '/common/points-collection'
 
 import './main.html';
 
@@ -19,22 +18,34 @@ Tracker.autorun(() => {
 Meteor.subscribe("images");
 Meteor.subscribe("points");
 
-Template.registerHelper("log", function(msg){
+Template.registerHelper("log", (msg) => {
     console.log(msg);
 });
 
-Template.registerHelper("mapLoaded", function(msg){
+Template.registerHelper("mapLoaded", (msg) => {
     return !!Session.get('map-loaded');
 });
 
-Template.registerHelper("isEditLocationMode", function(msg){
+Template.registerHelper("isEditLocationMode", (msg) => {
     return isEditLocationMode();
 });
 
-Template.registerHelper("formatGps", function(coords){
+Template.registerHelper("formatGps", (coords) => {
     if(!coords || coords.length < 2 || !coords.lat || !coords.long){
         return "";
     }else{
         return `(${coords.lat.toFixed(3)}, ${coords.long.toFixed(3)})`;
+    }
+});
+
+Template.registerHelper("getCurrentPoint", () => {
+        return Point.getCurrentOrNew();
+});
+
+Template.registerHelper("ifThen", (condition, value) => {
+    if(!!condition){
+        return value;
+    }else{
+        return null;
     }
 });
