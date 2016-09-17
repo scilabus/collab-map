@@ -18,7 +18,7 @@ Template.detail_card.helpers({
 
         const img = Images.findOne({_id: point.imgId});
         if(!img){
-            console.log(`Point ${point.imgId} has no picture`);
+            console.log(`Point ${point._id} has no picture`);
             return null
         }
 

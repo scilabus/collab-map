@@ -10,7 +10,7 @@
           </div>
 
           <div class="modal-footer">
-            <button class="modal-action modal-close waves-effect waves-green btn" type="submit">Envoyer</button>
+            <button class="modal-action waves-effect waves-green btn" type="submit">Envoyer</button>
             <button class="modal-action modal-close waves-effect waves-green btn-flat" id="cancel">Annuler</button>
           </div>
       </form>
@@ -27,7 +27,7 @@
             <div class="col s12">
                 <div class="input-field">
                     <label for="title" class="{{ifThen title 'active'}}">Titre *</label>
-                    <input name="title" type="text" class="required" value="{{title}}" required>
+                    <input name="title" type="text" class="required" value="{{title}}">
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
                 <div class="row">
                     <div class="col s10">
                         <label for="coordinates" class="{{ifThen coord 'active'}}">GPS *</label>
-                        <input disabled value="{{formatGps coord}}" class="required" name="coordinates" type="text" required>
+                        <input disabled value="{{formatGps coord}}" class="required" name="coordinates" type="text">
                     </div>
                     <div class="col s2">
                         <a class="btn-floating red" id="edit-location"><i class="material-icons">edit_location</i></a>

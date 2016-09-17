@@ -13,7 +13,6 @@ Template.addnew.events({
         event.preventDefault();
 
         const point = Point.getCurrentOrNew();
-
         point.title = event.target.title.value;
         point.date = event.target.date.value;
         point.links = {
@@ -22,7 +21,12 @@ Template.addnew.events({
         point.description = event.target.description.value;
         point.status = "published";
 
-        upsertPoint(point);
+        if(!point.title || !point.coord.lat || !point.coord.long) {
+            Materialize.toast(`Veuillez entrer un titre et des coordonnées au minimum`, 3000);
+        }else{
+            point.persist()
+            $('#modal-add-new').closeModal();
+        }
 
         // clearForm(event.target);
     },
