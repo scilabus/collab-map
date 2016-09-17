@@ -68,3 +68,26 @@ div.edit-location {
 .edit-mode-btn:hover {
     opacity: .9;
 }
+
+.photo-wrapper {
+    border: solid 1px rgb(212, 212, 212);
+    height: 200px;
+    width: 100%;
+}
+
+.placeholder {
+    background-color: rgb(237, 238, 242);
+    margin: 2px;
+    height: calc(100% - 4px);
+    cursor: pointer;
+}
+
+.add-img {
+    margin-top: 70px;
+    font-size: 48px;
+    color: rgb(212, 212, 212);
+}
+
+#file-upload {
+    display: none;
+}

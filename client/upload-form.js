@@ -37,13 +37,16 @@ Template.addnew.helpers({
     }
 });
 
-Template.addnewform.events({
+Template.uploadform.events({
     "change input[type=file]": function(event, template) {
         FS.Utility.eachFile(event, processFile);
+    },
+    "click #add-img-placeholder": () => {
+        $("#file-upload").click();
     }
 });
 
-Template.addnewform.helpers({
+Template.uploadform.helpers({
     isImageSent: () => {
         return getCurrentImg() != null;
     }
