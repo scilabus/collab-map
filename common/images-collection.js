@@ -8,7 +8,7 @@ export const Images = new FS.Collection("images", {
       new FS.Store.FileSystem("images", {
         path: ImagePath,
         filter: {
-            maxSize: 2*1024*1024, // in bytes
+            maxSize: 4*1024*1024, // in bytes
             allow: {
                 contentTypes: ['image/*'],
             }
@@ -35,7 +35,7 @@ function insertFile(file) {
             console.log(err);
             invalidFile(null, err);
         }else{
-            const point = new Point();
+            const point = Point.getCurrentOrNew();
             point.imgId = fileObj._id;
 
             if(fileObj.tags && fileObj.tags.GPSLongitude && fileObj.tags.GPSLatitude){
@@ -45,7 +45,7 @@ function insertFile(file) {
                     confidence: 1
                 }
             }
-            setCurrentPoint(point);
+            point.save();
         }
     });
 }

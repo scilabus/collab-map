@@ -41,22 +41,10 @@ Template.uploadform.events({
     "change input[type=file]": function(event, template) {
         FS.Utility.eachFile(event, processFile);
     },
-    "click #add-img-placeholder": () => {
+    "click #add-img-upload": () => {
         $("#file-upload").click();
-    }
-});
-
-Template.uploadform.helpers({
-    isImageSent: () => {
-        return getCurrentImg() != null;
-    }
-});
-
-Template.details.events({
-    "click #edit-location": enterEditLocationMode,
-    "change .required": () => {
-        Session.set("upload-form-valid", !!$("input[name='title']").val() && !!$("input[name='coordinates']").val());
-    }
+    },
+    "click #edit-location": enterEditLocationMode
 });
 
 export function enterEditPointMode(pointId) {

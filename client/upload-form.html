@@ -6,7 +6,7 @@
           <div class="modal-content">
             <h4>Ajouter une photo à la carte collaborative</h4>
 
-            {{> addnewform }}
+            {{> uploadform }}
           </div>
 
           <div class="modal-footer">
@@ -21,105 +21,56 @@
 </template>
 
 <template name="uploadform">
-    <div class="row">
-        <div class="col s12">
-            <div class="input-field">
-                <label for="title" class="{{ifThen title 'active'}}">Titre *</label>
-                <input name="title" type="text" class="required" value="{{title}}" required>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col s8">
-            <div class="row">
-                <label for="coordinates" class="{{ifThen coord 'active'}}">GPS *</label>
-                <input disabled value="{{formatGps coord}}" class="required" name="coordinates" type="text" required>
-                <a class="btn-floating red" id="edit-location"><i class="material-icons">edit_location</i></a>
-            </div>
-            <div class="row">
-                <label for="date" class="{{ifThen date 'active'}}">Date</label>
-                <input value="{{date}}" name="date" type="text" class="validate">
-            </div>
-            <div class="row">
-                <label for="tags" class="{{ifThen tags 'active'}}">Tags</label>
-                <input name="tags" type="text" class="validate" value="{{tags}}">
-            </div>
-            <div class="row">
-                <label for="wikipedia" class="{{ifThen links.wikipedia 'active'}}">Page Wikipedia</label>
-                <input name="wikipedia" type="text" class="validate" value="{{links.wikipedia}}">
-            </div>
-        </div>
-        <div class="col s4">
-            <div class="photo-wrapper">
-                <div for="file-upload" class="placeholder center-align" id="add-img-placeholder">
-                    <i class="material-icons add-img">add</i>
+    {{#with getCurrentPoint }}
+    {{log this}}
+        <div class="row">
+            <div class="col s12">
+                <div class="input-field">
+                    <label for="title" class="{{ifThen title 'active'}}">Titre *</label>
+                    <input name="title" type="text" class="required" value="{{title}}" required>
                 </div>
             </div>
-            <input id="file-upload" type="file"/>
         </div>
-    </div>
-    <div class="row">
-        <label for="description"  class="{{ifThen description 'active'}}">Description <small>(HTML)</small></label>
-        <textarea name="description" class="materialize-textarea">{{description}}</textarea>
-    </div>
-</template>
-
-
-<template name="details">
-    {{#with getCurrentPoint }}
         <div class="row">
-           <div class="col s12">
-             <div class="row">
-               <div class="input-field col s12">
-                 <input name="title" type="text" class="required" value="{{title}}" required>
-                 <label for="title" class="{{ifThen title 'active'}}">Titre *</label>
-               </div>
-             </div>
-         </div>
-         <div class="col s6">
-             <div class="row">
-                 <div class="input-field row">
-                   <input value="{{date}}" name="date" type="text" class="validate">
-                   <label for="date" class="{{ifThen date 'active'}}">Date2</label>
-                 </div>
-                 <div class="input-field rw">
-                   <input disabled value="{{formatGps coord}}" class="required" name="coordinates" type="text" required>
-                   <label for="coordinates" class="{{ifThen coord 'active'}}">GPS 2*</label>
-                 </div>
-             </div>
-         </div>
-         <div class="col s6">
-             <div class="input-field col s12">
-               <input value="{{date}}" name="date" type="text" class="validate">
-               <label for="date" class="{{ifThen date 'active'}}">Date2</label>
-             </div>
-         </div>
-         <div class="col s12">
-             <div class="row">
-               <div class="input-field col s6">
-
-               </div>
-               <div class="input-field col s5">
-
-               </div>
-               <div class="input-field col s1">
-
-               </div>
-             </div>
-             <div class="row">
-               <div class="input-field col s6">
-
-               </div>
-               <div class="input-field col s6">
-
-               </div>
-             </div>
-             <div class="row">
-               <div class="input-field col s12">
-
-               </div>
-             </div>
-         </div>
-         </div>
-     {{/with}}
+            <div class="col s8">
+                <div class="row">
+                    <div class="col s10">
+                        <label for="coordinates" class="{{ifThen coord 'active'}}">GPS *</label>
+                        <input disabled value="{{formatGps coord}}" class="required" name="coordinates" type="text" required>
+                    </div>
+                    <div class="col s2">
+                        <a class="btn-floating red" id="edit-location"><i class="material-icons">edit_location</i></a>
+                    </div>
+                </div>
+                <div class="row">
+                    <label for="date" class="{{ifThen date 'active'}}">Date</label>
+                    <input value="{{date}}" name="date" type="text" class="validate">
+                <!-- </div> -->
+                <!-- <div class="row"> -->
+                    <label for="tags" class="{{ifThen tags 'active'}}">Tags</label>
+                    <input name="tags" type="text" class="validate" value="{{tags}}">
+                <!-- </div> -->
+                <!-- <div class="row"> -->
+                    <label for="wikipedia" class="{{ifThen links.wikipedia 'active'}}">Page Wikipedia</label>
+                    <input name="wikipedia" type="text" class="validate" value="{{links.wikipedia}}">
+                </div>
+            </div>
+            <div class="col s4">
+                <div class="photo-wrapper" id="add-img-upload">
+                    {{#if imgId}}
+                        <img class="img-preview" src="{{ imgURL }}">
+                    {{else}}
+                        <div for="file-upload" class="placeholder center-align">
+                            <i class="material-icons add-img">add</i>
+                        </div>
+                    {{/if}}
+                </div>
+                <input id="file-upload" type="file"/>
+            </div>
+        </div>
+        <div class="row">
+            <label for="description"  class="{{ifThen description 'active'}}">Description <small>(HTML)</small></label>
+            <textarea name="description" class="materialize-textarea">{{description}}</textarea>
+        </div>
+    {{/with}}
 </template>

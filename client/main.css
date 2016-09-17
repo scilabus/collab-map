@@ -70,16 +70,24 @@ div.edit-location {
 }
 
 .photo-wrapper {
-    border: solid 1px rgb(212, 212, 212);
     height: 200px;
     width: 100%;
+    cursor: pointer;
+    margin-left: 5px;
 }
 
 .placeholder {
+    border: solid 1px rgb(212, 212, 212);
     background-color: rgb(237, 238, 242);
-    margin: 2px;
-    height: calc(100% - 4px);
-    cursor: pointer;
+    height: 100%;
+    padding: 2px;
+    width: inherit;
+}
+
+.img-preview {
+    border: solid 1px rgb(212, 212, 212);
+    padding: 2px;
+    width: inherit;
 }
 
 .add-img {
@@ -90,4 +98,8 @@ div.edit-location {
 
 #file-upload {
     display: none;
+}
+
+form .row .col {
+    padding: 0px;
 }
