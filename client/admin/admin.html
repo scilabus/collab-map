@@ -1,3 +1,85 @@
 <template name="admin">
-    ADMIN
+    <div class="container">
+
+      {{> admin_points }}
+
+      <div class="divider"></div>
+
+      {{> admin_images }}
+
+    </div>
+</template>
+
+
+<template name="admin_points">
+    <div class="section">
+        <h5>Points</h5>
+
+        {{#with getPoints}}
+        <p> {{ count }} Points: </p>
+        <table class="striped">
+            <thead>
+             <tr>
+                 <th>Id</th>
+                 <th>Titre</th>
+                 <th>Coords</th>
+                 <th>Img</th>
+                 <th>Status</th>
+                 <th></th>
+             </tr>
+            </thead>
+
+            <tbody>
+            {{#each this}}
+             <tr>
+               <td>{{_id}}</td>
+               <td>{{title}}</td>
+               <td>{{formatGps coord}}</td>
+               <td>{{imgId}}</td>
+               <td>{{status}}</td>
+               <td class="right">
+                   <i class="material-icons admin-action" id="point-clear" data-id="{{_id}}">clear</i>
+                   <i class="material-icons admin-action" id="point-delete" data-id="{{_id}}">delete</i>
+               </td>
+             </tr>
+             {{/each}}
+            </tbody>
+        </table>
+        {{/with}}
+    </div>
+</template>
+
+<template name="admin_images">
+    <div class="section">
+        <h5>Images</h5>
+
+        {{#with getImages}}
+        <p> {{ length }} Images: </p>
+
+        <table class="striped">
+            <thead>
+             <tr>
+                 <th>Id</th>
+                 <th>Point</th>
+                 <th>Envoyé le</th>
+                 <th></th>
+             </tr>
+            </thead>
+
+            <tbody>
+            {{#each this}}
+            {{log this}}
+             <tr>
+               <td><a href="{{ url }}" target="_blank">{{_id}}</a></td>
+               <td>{{pointId}}</td>
+               <td>{{uploadedAt}}</td>
+               <td class="right">
+                   <i class="material-icons admin-action" id="img-delete" data-id="{{_id}}">delete</i>
+               </td>
+             </tr>
+             {{/each}}
+            </tbody>
+        </table>
+        {{/with}}
+    </div>
 </template>

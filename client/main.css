@@ -124,3 +124,11 @@ form .row .col {
     padding: 0px 10px 0px 40px !important;
     width: auto !important;
 }
+
+.admin-action {
+    cursor: pointer;
+    color: rgb(212, 212, 212);
+}
+.admin-action:hover {
+    color: #F44336;
+}
