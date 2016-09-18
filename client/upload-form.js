@@ -35,12 +35,6 @@ Template.addnew.events({
     }
 });
 
-Template.addnew.helpers({
-    isInvalid: () => {
-        return Session.get("upload-form-valid") != true;
-    }
-});
-
 Template.uploadform.events({
     "change input[type=file]": function(event, template) {
         FS.Utility.eachFile(event, processFile);
