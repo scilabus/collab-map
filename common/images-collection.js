@@ -1,6 +1,6 @@
 const parser = require('exif-parser');
 import { Session } from 'meteor/session'
-import { Point, setCurrentPoint } from '/common/points-collection'
+import { Point } from '/common/points-collection'
 
 export const ImagePath = "~/data/images";
 export const Images = new FS.Collection("images", {

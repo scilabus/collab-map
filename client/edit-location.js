@@ -1,5 +1,5 @@
 import { Session } from 'meteor/session'
-import { Point, setCurrentPoint } from '/common/points-collection'
+import { Point } from '/common/points-collection'
 import {enterEditLocationMode as mapEnterEdit, exitEditLocationMode as mapExitEdit} from '/client/map/map.js'
 
 export function enterEditLocationMode() {
@@ -24,7 +24,7 @@ export function exitEditLocationMode(save = true) {
             long: Session.get("edit-location-long"),
             confidence: Session.get("edit-location-confidence")
         }
-        setCurrentPoint(point);
+        point.save();
     }
 
     Session.set("mode", Session.get("previous-mode") || null);

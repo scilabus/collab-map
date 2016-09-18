@@ -1,6 +1,6 @@
 import { Session } from 'meteor/session'
 import { Images, processFile } from '/common/images-collection'
-import { Point, setCurrentPoint, upsertPoint } from '/common/points-collection'
+import { Point } from '/common/points-collection'
 import { enterEditLocationMode } from '/client/edit-location'
 
 Template.addnew.events({
@@ -53,16 +53,12 @@ Template.uploadform.events({
 
 export function enterEditPointMode(pointId) {
     const p = Point.getPoint(pointId);
-    setCurrentPoint(p);
+    p.save();
     $('#modal-add-new').openModal();
 }
 
-function getCurrentImg() {
-    return Session.get('current-img') || null;
-}
-
 function clearForm(form) {
-    Session.set('current-point', null);
+    Point.clearCurrent();
     if(form){
         form.reset();
     }

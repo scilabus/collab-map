@@ -72,22 +72,3 @@ export class Point {
         Session.set('current-point', null);
     }
 }
-
-export function setCurrentPoint(point) {
-    return Session.set('current-point', point);
-}
-
-export function upsertPoint(point){
-    let id = point._id;
-
-    // real upsert is not available from client side
-    if(id && !!Points.findOne({_id: id})){
-        delete point._id;
-        Points.update({_id: id}, {$set: point});
-    }else{
-        id = Points.insert(point);
-    }
-
-    // not reusing point to refresh id (if we want to insert-edit)
-    setCurrentPoint(Point.getPoint(id));
-}
