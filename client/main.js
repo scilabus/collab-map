@@ -8,8 +8,22 @@ import { Point } from '/common/points-collection'
 
 import './main.html';
 
+FlowRouter.route('/admin', {
+    name: 'admin',
+    action: (params, queryParams) => {
+        BlazeLayout.render('admin');
+    }
+});
+
+FlowRouter.route('/', {
+    name: 'map',
+    action: (params, queryParams) => {
+        BlazeLayout.render('map');
+    }
+});
+
 Meteor.startup(() => {
-    loadMap('map');
+    // loadMap('map');
 });
 
 Tracker.autorun(() => {
@@ -58,3 +72,7 @@ Template.registerHelper("ifThen", (condition, value) => {
         return null;
     }
 });
+
+Template.map.onRendered(() => {
+    loadMap('map');
+})

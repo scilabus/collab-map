@@ -14,30 +14,33 @@
 </head>
 
 <body>
-  {{> preloader }}
-
-  {{> social }}
-
-  <div id="map"></div>
-  <div id="geo-search" class="z-depth-2"></div>
-
-  {{#if mapLoaded}}
-      {{#if isEditLocationMode}}
-        {{> edit_location}}
-
-      {{else}}
-        {{> sidebar }}
-        {{> detail_card }}
-      {{/if}}
-
-      {{> addnew }}
-  {{/if}}
-
-
 </body>
 
+<template name="map">
+
+    {{> social }}
+
+    <div id="map"></div>
+    <div id="geo-search" class="z-depth-2"></div>
+
+    {{#if mapLoaded}}
+        {{#if isEditLocationMode}}
+          {{> edit_location}}
+
+        {{else}}
+          {{> sidebar }}
+          {{> detail_card }}
+        {{/if}}
+
+        {{> addnew }}
+
+    {{else}}
+        {{> preloader }}
+    {{/if}}
+</template>
+
 <template name="preloader">
-    <div class="preloader-wrapper big active valign-wrapper">
+    <div class="preloader-wrapper big active valign-wrapper" id="preloader">
       <div class="spinner-layer spinner-blue-only valign">
         <div class="circle-clipper left">
           <div class="circle"></div>
