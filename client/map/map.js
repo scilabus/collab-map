@@ -1,6 +1,6 @@
 import { Tracker } from 'meteor/tracker'
 import { Session } from 'meteor/session'
-import { Points } from '/common/points-collection'
+import { Point, Points } from '/common/points-collection'
 
 let map = null;
 let isEditLocationMode = false;
@@ -182,10 +182,10 @@ function onMouseMove(e) {
 function onClick(e) {
     const features = map.queryRenderedFeatures(e.point, { layers: ['points-layer'] });
     if (features.length) {
-        Session.set('selected-marker', features[0].properties.id);
+        Point.getPoint(features[0].properties.id).save();
         map.flyTo({center: features[0].geometry.coordinates});
     }else{
-        Session.set('selected-marker', null);
+        Point.clearCurrent();
     }
 }
 

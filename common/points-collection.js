@@ -67,6 +67,10 @@ export class Point {
     static getCurrentOrNew() {
         return new Point( Session.get('current-point') );
     }
+
+    static clearCurrent() {
+        Session.set('current-point', null);
+    }
 }
 
 export function setCurrentPoint(point) {

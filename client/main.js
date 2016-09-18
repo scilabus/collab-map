@@ -38,6 +38,15 @@ Template.registerHelper("formatGps", (coords) => {
     }
 });
 
+Template.registerHelper("getCurrentPointOrNull", () => {
+        const p = Point.getCurrentOrNew();
+        if(!p._id){
+            return null;
+        }else{
+            return p;
+        }
+});
+
 Template.registerHelper("getCurrentPoint", () => {
         return Point.getCurrentOrNew();
 });

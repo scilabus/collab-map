@@ -13,6 +13,7 @@
 
 .point-info {
     width: 320px;
+    min-height: 300px;
     position: absolute;
     left: 10px;
     top: 60px;
@@ -59,14 +60,18 @@ div.edit-location {
 
 .edit-mode-btn {
     position: absolute;
-    right: 10px;
-    top: 10px;
-    color: white;
+    bottom: 10px;
+    left: 10px;
     opacity: .1;
 }
 
 .edit-mode-btn:hover {
-    opacity: .9;
+    opacity: .8;
+    cursor: pointer;
+}
+
+.edit-mode-btn i {
+    font-size: 18px;
 }
 
 .photo-wrapper {

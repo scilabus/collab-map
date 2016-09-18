@@ -1,10 +1,12 @@
 <template name="detail_card">
-    {{#with getSelectedMarker}}
+    {{#with getCurrentPointOrNull}}
+        {{ log this }}
         <div class="card point-info hoverable">
+            {{#with imgURL}}
             <div class="card-image waves-effect waves-block waves-light">
-                <img class="activator" src="{{ imgUrl }}">
-                <div class="edit-mode-btn"><i class="material-icons right">edit</i></div>
+                <img class="activator" src="{{ this }}">
             </div>
+            {{/with}}
             <div class="card-content">
                 <span class="card-title activator grey-text text-darken-4">{{ title }}<i class="material-icons right">more_vert</i></span>
             </div>
@@ -19,6 +21,8 @@
     <div class="card-reveal">
         <span class="card-title grey-text text-darken-4"> {{ title }} <i class="material-icons right">close</i></span>
         <p>{{{ description }}}</p>
+
+        <div class="edit-mode-btn"><i class="material-icons left">edit</i></div>
 
         <p class="icon-links">
             <div class="fb-like adjust-fb" data-href="http://example.com" data-layout="button" data-action="like" data-size="small" data-show-faces="false" data-share="false">

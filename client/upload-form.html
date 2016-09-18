@@ -22,7 +22,6 @@
 
 <template name="uploadform">
     {{#with getCurrentPoint }}
-    {{log this}}
         <div class="row">
             <div class="col s12">
                 <div class="input-field">
@@ -45,12 +44,10 @@
                 <div class="row">
                     <label for="date" class="{{ifThen date 'active'}}">Date</label>
                     <input value="{{date}}" name="date" type="text" class="validate">
-                <!-- </div> -->
-                <!-- <div class="row"> -->
+
                     <label for="tags" class="{{ifThen tags 'active'}}">Tags</label>
                     <input name="tags" type="text" class="validate" value="{{tags}}">
-                <!-- </div> -->
-                <!-- <div class="row"> -->
+
                     <label for="wikipedia" class="{{ifThen links.wikipedia 'active'}}">Page Wikipedia</label>
                     <input name="wikipedia" type="text" class="validate" value="{{links.wikipedia}}">
                 </div>
