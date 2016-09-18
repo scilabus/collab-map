@@ -75,6 +75,15 @@ function loadLayers(map) {
         },
     });
 
+    // geocoder
+    const geocoder = new mapboxgl.Geocoder({
+        container: "geo-search",
+        placeholder: "Rechercher",
+        country: "fr",
+        types: "poi,address"
+    });
+    map.addControl(geocoder);
+
     Tracker.autorun( () => {
         setData( Points.find() );
     });
@@ -82,6 +91,15 @@ function loadLayers(map) {
     map.on('mousemove', onMouseMove);
     map.on('click', onClick);
     map.on('mousedown', onMouseDown, true);
+
+    geocoder.on('result', (e) => {
+        console.log(e);
+        editLocationMarker.features[0].geometry= e.result.geometry;
+        map.getSource('edit-location').setData(editLocationMarker);
+
+        Session.set('edit-location-long', e.result.geometry.coordinates[0]);
+        Session.set('edit-location-lat', e.result.geometry.coordinates[1]);
+    })
 
     // display the rest
     Session.set('map-loaded', true);
@@ -93,6 +111,9 @@ export function flyTo(lat, long) {
 
 export function enterEditLocationMode(){
     isEditLocationMode = true;
+
+    $("#show-menu").hide();
+    $("#geo-search").show();
 
     const lng = Session.get('edit-location-long') || map.getCenter().lng;
     const lat = Session.get('edit-location-lat') || map.getCenter().lat;
@@ -108,6 +129,9 @@ export function enterEditLocationMode(){
 export function exitEditLocationMode(){
     map.setLayoutProperty('edit-location', 'visibility', 'none');
     map.setLayoutProperty('points-layer', 'visibility', 'visible');
+
+    $("#geo-search").hide();
+    $("#show-menu").show();
 
     isEditLocationMode = false;
 }

@@ -5,10 +5,12 @@
         body { margin:0; padding:0; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
     </style>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.23.0/mapbox-gl.css' rel='stylesheet' />
+    <link href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v1.3.1/mapbox-gl-geocoder.css' rel='stylesheet' />
 
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.23.0/mapbox-gl.js'></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v1.3.1/mapbox-gl-geocoder.js'></script>
 </head>
 
 <body>
@@ -17,10 +19,12 @@
   {{> social }}
 
   <div id="map"></div>
+  <div id="geo-search" class="z-depth-2"></div>
 
   {{#if mapLoaded}}
       {{#if isEditLocationMode}}
         {{> edit_location}}
+
       {{else}}
         {{> sidebar }}
         {{> detail_card }}

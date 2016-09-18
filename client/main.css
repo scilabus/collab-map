@@ -103,3 +103,19 @@ div.edit-location {
 form .row .col {
     padding: 0px;
 }
+
+#geo-search {
+    display: none;
+    position: absolute;
+    top: 80px;
+    left: 10px;
+}
+
+.mapboxgl-ctrl-geocoder, .mapboxgl-ctrl-geocoder ul {
+    box-shadow: none;
+}
+
+.mapboxgl-ctrl-geocoder input[type='text'] {
+    padding: 0px 10px 0px 40px !important;
+    width: auto !important;
+}
