@@ -15,7 +15,7 @@ export function loadMap(container){
     }else{
         map = new mapboxgl.Map({
             container: container, // container id
-            style: 'mapbox://styles/scilabus/cisy4halw004t2wo0mnacdepj', //stylesheet location
+            style: 'mapbox://styles/scilabus/cit8quu1c00432xmfn5l6r81v', //stylesheet location
             center: [2.3522, 48.8566], // starting position
             zoom: 12 // starting zoom
         });
@@ -53,9 +53,12 @@ function loadLayers(map) {
         "layout": {
             "icon-image": "marker-red",
             "text-field": "{title}",
-            "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-            "text-offset": [0, 0.6],
+            "text-offset": [0, 0.8],
             "text-anchor": "top"
+        },
+        "paint": {
+            "text-halo-width": 2,
+            "text-halo-color": "rgba(255, 255, 255, .85)"
         }
     });
 
