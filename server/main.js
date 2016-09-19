@@ -11,10 +11,16 @@ Meteor.startup(() => {
 Meteor.methods({
 });
 
+
+
 Meteor.publish("images", () => {
     return Images.find({});
 });
 
 Meteor.publish("points", () => {
-    return Points.find({status: "published"});
+    if(this.userId){
+        return Points.find({});
+    }else{
+        return Points.find({status: "published"});
+    }
 });

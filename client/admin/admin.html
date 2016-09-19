@@ -1,15 +1,41 @@
 <template name="admin">
     <div class="container">
+    {{#if currentUser }}
+        {{> admin_points }}
 
-      {{> admin_points }}
+        <div class="divider"></div>
 
-      <div class="divider"></div>
-
-      {{> admin_images }}
+        {{> admin_images }}
+    {{else}}
+        {{> admin_login }}
+    {{/if}}
 
     </div>
 </template>
 
+<template name="admin_login">
+    <form class="col login-form">
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">verified_user</i>
+          <input id="login" type="text" class="validate">
+          <label for="login">Login</label>
+        </div>
+        <div class="input-field col s12">
+          <i class="material-icons prefix">lock_open</i>
+          <input id="password" type="password" class="validate">
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12 right-align">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Login
+              <i class="material-icons right">send</i>
+            </button>
+        </div>
+    </div>
+    </form>
+</template>
 
 <template name="admin_points">
     <div class="section">
@@ -68,7 +94,6 @@
 
             <tbody>
             {{#each this}}
-            {{log this}}
              <tr>
                <td><a href="{{ url }}" target="_blank">{{_id}}</a></td>
                <td>{{pointId}}</td>

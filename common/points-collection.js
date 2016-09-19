@@ -4,7 +4,8 @@ import { Images } from '/common/images-collection'
 export const Points = new Mongo.Collection('points');
 Points.allow({
     'insert': () => { return true },
-    'update': () => { return true }
+    'update': () => { return true },
+    'remove': () => { return !!Meteor.userId() }
 });
 
 const DefaultJSONContent = {

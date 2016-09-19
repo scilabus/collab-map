@@ -129,6 +129,13 @@ form .row .col {
     cursor: pointer;
     color: rgb(212, 212, 212);
 }
+
 .admin-action:hover {
     color: #F44336;
+}
+
+.login-form {
+    width: 300px;
+    margin: auto;
+    margin-top: 150px;
 }

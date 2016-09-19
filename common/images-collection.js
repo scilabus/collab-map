@@ -18,19 +18,14 @@ export const Images = new FS.Collection("images", {
 });
 
 Images.allow({
-    'insert': function () {
-        return true;
-    },
-    'update': function () {
-        return true;
-    },
-    'download': function () {
-        return true;
-    }
+    'insert': () => { return true; },
+    'update': () => { return true; },
+    'download': () => { return true; },
+    'remove': () => { return !!Meteor.userId(); }
 });
 
 function insertFile(file) {
-    Images.insert(file, function (err, fileObj) {
+    Images.insert(file, (err, fileObj) => {
         if(err){
             console.log(err);
             invalidFile(null, err);

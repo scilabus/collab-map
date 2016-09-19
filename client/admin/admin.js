@@ -1,6 +1,15 @@
 import { Points } from '/common/points-collection'
 import { Images } from '/common/images-collection'
 
+Template.admin_login.events({
+    'submit form': (e, t) => {
+        e.preventDefault();
+        const username = e.target.login.value.trim();
+        const passwd = e.target.password.value.trim();
+        login(username, passwd);
+    }
+});
+
 Template.admin_points.helpers({
     getPoints: () => {
         return Points.find();
@@ -45,3 +54,11 @@ Template.admin_images.events({
         }
     }
 });
+
+function login(username, password) {
+    Meteor.loginWithPassword(username, password, (e) => {
+        if(e.reason){
+            Materialize.toast(e.reason, 1000);
+        }
+    });
+}
