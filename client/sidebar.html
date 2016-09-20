@@ -1,19 +1,36 @@
 <template name="sidebar">
     <ul id="slide-out" class="side-nav">
-        <img src="https://pbs.twimg.com/profile_images/556466074699329536/a5Sed1V4_400x400.jpeg" width="200"/>
+        <div class="center-align"><img src="https://pbs.twimg.com/profile_images/556466074699329536/a5Sed1V4_400x400.jpeg" width="150" /></div>
 
-       <li><div class="divider"></div></li>
-       <li><a class="subheader">Images</a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
 
-       <ul class="collection">
-           {{#each getPoints}}
-           <a href="#!" class="collection-item point" data-lat="{{coord.lat}}" data-long="{{coord.long}}">
+        {{#each getPoints}}
+        <li>
+            <a href="#!" class="waves-effect nav-point" data-lat="{{coord.lat}}" data-long="{{coord.long}}" data-id={{_id}}>
                {{title}}
-               <span class="secondary-content"><i class="material-icons right">location_on</i></span>
+               {{#if imgId}}
+                <i class="material-icons right">photo_camera</i>
+               {{/if}}
            </a>
-           {{/each}}
-       </ul>
-     </ul>
+        </li>
+        {{/each}}
+
+        <div class="bottom-links">
+            <li>
+                <div class="divider"></div>
+            </li>
+            <div class="row">
+                <div class="col s6">
+                    <li><a class="waves-effect" href="https://www.youtube.com/scilabus" target="_blank"><i class="fa fa-youtube-play" aria-hidden="true"></i> YouTube</a></li>
+                </div>
+                <div class="col s6">
+                    <li><a class="waves-effect" href="https://github.com/scilabus" target="_blank"><i class="fa fa-github" aria-hidden="true"></i> GitHub</a></li>
+                </div>
+            </div>
+        </div>
+    </ul>
 
     <a data-activates="slide-out" class="button-collapse waves-effect waves-light btn " id="show-menu"> <i class="material-icons">menu</i> </a>
 </template>

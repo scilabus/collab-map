@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor'
 import { flyTo } from './map/map'
 
-import {Points} from '/common/points-collection'
+import { Points, Point } from '/common/points-collection'
 
 Template.sidebar.helpers({
     getPoints: () => {
@@ -11,6 +11,7 @@ Template.sidebar.helpers({
 
 Template.sidebar.onRendered(function() {
     $("#show-menu").sideNav({
+        menuWidth: 350,
         closeOnClick: true
     });
 });
@@ -27,9 +28,10 @@ Template.sidebar.events({
         });
     },
 
-    'click .point'(event, template){
+    'click .nav-point'(event, template){
         const lat = parseFloat(event.currentTarget.dataset.lat);
         const long = parseFloat(event.currentTarget.dataset.long);
+        Point.setCurrentId(event.currentTarget.dataset.id);
         flyTo(long, lat);
     },
 });

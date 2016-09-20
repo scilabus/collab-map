@@ -11,6 +11,22 @@
     background-color: #64b5f6;
 }
 
+.nav-point i {
+    line-height: unset;
+}
+
+.side-nav a {
+    height: 48px;
+    line-height: 48px;
+}
+.bottom-links {
+    margin-top: 50px;
+}
+
+.bottom-links a:hover {
+    color: #F44336;
+}
+
 .point-info {
     width: 320px;
     min-height: 300px;
