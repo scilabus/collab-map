@@ -24,10 +24,7 @@
         <div class="edit-mode-btn"><i class="material-icons left">edit</i></div>
 
         <p class="icon-links">
-            <div class="fb-like adjust-fb" data-href="http://example.com" data-layout="button" data-action="like" data-size="small" data-show-faces="false" data-share="false">
-            </div>
-
-            <a href="https://twitter.com/share" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+            {{> social_btn }}
 
             {{#if wikipedia}}
                 <a href="{{wikipedia}}" target="_blank">
@@ -36,4 +33,21 @@
             {{/if}}
         </p>
     </div>
+</template>
+
+<template name="social_btn">
+    <div class="fb-share-button"
+		data-href="https://map.scilabus.com/point/{{_id}}"
+		data-layout="button">
+	</div>
+
+    <a href="https://twitter.com/share" class="twitter-share-button"
+        data-show-count="false"
+        data-text="{{title}}"
+        data-via="scilabus"
+        data-url="https://map.scilabus.com/point/{{_id}}">
+        Tweet
+    </a>
+    <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 </template>
