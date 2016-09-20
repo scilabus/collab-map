@@ -15,6 +15,17 @@ FlowRouter.route('/admin', {
     }
 });
 
+FlowRouter.route('/point/:id', {
+    name: 'map',
+    action: (params, queryParams) => {
+        const id = params.id;
+        if(id && typeof(id) === "string" && id.length < 64){
+            Point.setCurrentId(id);
+        }
+        BlazeLayout.render('map');
+    }
+});
+
 FlowRouter.route('/', {
     name: 'map',
     action: (params, queryParams) => {
@@ -66,7 +77,7 @@ Template.registerHelper("getCurrentPoint", () => {
 });
 
 Template.registerHelper("ifThen", (condition, value) => {
-    if(!!condition){
+    if(condition){
         return value;
     }else{
         return null;

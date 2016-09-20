@@ -25,11 +25,11 @@ const DefaultJSONContent = {
 };
 
 export class Point {
-    constructor(json) {
-        if(json === null || json === undefined){
+    constructor(object) {
+        if(object === null || object === undefined){
             Object.assign(this, DefaultJSONContent);
         }else{
-            Object.assign(this, json);
+            Object.assign(this, object);
         }
     }
 
@@ -51,7 +51,7 @@ export class Point {
     persist() {
         let id = this._id;
         // real upsert is not available from client side
-        if(id && !!Points.findOne({_id: id})){
+        if(id && Points.findOne({_id: id})){
             Points.update({_id: id}, {$set: _.omit(this, '_id')});
         }else{
             id = Points.insert(this);
@@ -66,10 +66,27 @@ export class Point {
     }
 
     static getCurrentOrNew() {
-        return new Point( Session.get('current-point') );
+        let p = Session.get('current-point');
+
+        if(p) {
+            if(typeof(p) == "string"){
+                return Point.getPoint(p);
+            }else if (p instanceof Point) {
+                return p;
+            }else if (p instanceof Object){
+                return new Point(p);
+            }
+            console.warn("Unknown type ", typeof(p), p);
+        }
+
+        return new Point();
     }
 
     static clearCurrent() {
         Session.set('current-point', null);
+    }
+
+    static setCurrentId(id) {
+        Session.set('current-point', id);
     }
 }
